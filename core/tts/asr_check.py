@@ -1,8 +1,8 @@
-"""Whisper line-by-line check: python core/tts/asr_check.py lines.json voices_dir [--lang en|zh|auto] [--model base|small|…] [--threshold 0.92]
+"""Whisper line-by-line check: python core/tts/asr_check.py lines.json voices_dir [--lang en|zh|th|auto] [--model base|small|…] [--threshold 0.92]
 Compares each line's text with its transcription (0.6 s of silence is padded on both sides first; short lines are misheard without it) and
 writes per-word timestamps to voices_dir/words.json (for lip sync and line breaks).
 A line in lines.json may carry an "asr" field that overrides the expected text (proper names, onomatopoeia, a word Whisper always hears as another).
---lang  auto (default) decides by whether the text contains CJK characters. en requires an exact word-by-word match after dropping punctuation
+--lang  auto (default) decides by whether the text contains CJK or Thai characters. en requires an exact word-by-word match after dropping punctuation
         and case (whole numbers 0–999 are turned into words on both sides, so "forty" and "40" match; larger numbers, years, ordinals like 3rd and
         numbers with punctuation (3.5, 1:30, 1,000, 40%) are not, so write the expected transcription in the "asr" field). zh (also ja / ko) compares
         by character, each number counting as one character with its value: 十九 and 19, 两千零二十六 and 2026, 一万九千 and 1.9万, 三点五 and 3.5,
@@ -10,17 +10,27 @@ A line in lines.json may carry an "asr" field that overrides the expected text (
         ≥ --threshold (default 0.92) passes, except that a number heard as a different number fails the line (三只 heard as 五只, 一百 as 1000);
         a number left out fails too (一, often a plain word, excepted); a number heard as a word that isn't one (千里 as 尖里) only lowers the
         similarity. 三点五十分 matches 3点50分 and 3:50, not 3点5分. Whisper often drops punctuation, so in its text 点 and a comma between digits
-        are also read as a word and a pause (三点，两个人 / 三点两个人; 一百，两百 / 100,200).
-Model: --model (or the WHISPER_MODEL environment variable; a model name, or a local folder for offline use); default en → base.en, zh → small (base mishears too many Chinese lines), other languages → base (multilingual).
+        are also read as a word and a pause (三点，两个人 / 三点两个人; 一百，两百 / 100,200). th compares by character, vowels and tone marks
+        included, with the same --threshold. Digits become their Thai reading on both sides, so 50 and ห้าสิบ, 2,569 and สองพันห้าร้อยหกสิบเก้า, ๕๐ and 50,
+        3.5 and สามจุดห้า, 30% and สามสิบเปอร์เซ็นต์ are the same, and a number heard as a different number fails the line. One other word changed in a long
+        line stays above the threshold, and a line with one wrong word can score higher than a correct line, so listen to Thai lines as well.
+        A number read another way (digit by digit, ร้อยละ for %) goes in the "asr" field. A word that contains a numeral (สามี, เก้าอี้) can fail
+        a line when it is misheard: listen, and if it is right, put what the model heard in "asr". Any other language written outside the Latin
+        alphabet has no comparison here and fails the line rather than passing it unchecked.
+Model: --model (or the WHISPER_MODEL environment variable; a model name, or a local folder for offline use); default en → base.en, zh → small (base mishears too many Chinese lines), th → medium (base and small garble correct Thai lines), other languages → base (multilingual).
       If the default mishears a line that sounds right to you, check again with a larger model (base → small, about 480 MB; small → medium), more accurate and several times slower.
-      The first run downloads from Hugging Face (base / base.en ≈ 145 MB, small ≈ 480 MB); behind a firewall set HF_ENDPOINT=https://hf-mirror.com,
+      The first run downloads from Hugging Face (base / base.en ≈ 145 MB, small ≈ 480 MB, medium ≈ 1.5 GB); behind a firewall set HF_ENDPOINT=https://hf-mirror.com,
       or download the model beforehand and pass --model /path/to/model-dir.
 Exit codes: 0 all lines pass; 1 some lines differ; 2 the check could not run (model failed to load, etc.).
 """
 import sys, json, re, os, argparse, difflib, unicodedata
 
 CJK = re.compile('[㐀-鿿豈-﫿぀-ヿ가-힯]')
+THAI = re.compile('[฀-๿]')
 CHAR_LANGS = {'zh', 'ja', 'ko'}           # these languages are compared by character, the rest by word
+_TH_DIGIT = 'ศูนย์ หนึ่ง สอง สาม สี่ ห้า หก เจ็ด แปด เก้า'.split()
+_TH_UNIT = ['', 'สิบ', 'ร้อย', 'พัน', 'หมื่น', 'แสน']
+_TH_NUM = re.compile('(?:ศูนย์|หนึ่ง|ยี่|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ|ร้อย|พัน|หมื่น|แสน|ล้าน)+')
 _ZH_DIGIT = dict(zip('零〇一二三四五六七八九两兩', '0012345678922'))   # 萬 億 兩: Whisper sometimes writes traditional characters
 _ZH_UNIT = {'十': 10, '百': 100, '千': 1000, '万': 10 ** 4, '萬': 10 ** 4, '亿': 10 ** 8, '億': 10 ** 8}
 _ZH_D = r'\d零〇一二三四五六七八九两兩'
@@ -129,8 +139,47 @@ def zh_check(a, b, threshold):
     return r >= threshold, '' if r >= threshold else f'similarity {r:.2f} < {threshold}'
 
 
+def th_int(n):
+    """A whole number → its Thai reading: 21 → ยี่สิบเอ็ด, 110 → หนึ่งร้อยสิบ, 2569 → สองพันห้าร้อยหกสิบเก้า. Above a million the groups repeat."""
+    if n >= 10 ** 6:
+        hi, lo = divmod(n, 10 ** 6); return th_int(hi) + 'ล้าน' + (th_int(lo) if lo else '')
+    if not n: return _TH_DIGIT[0]
+    digits, out = str(n), ''
+    for i, c in enumerate(digits):
+        d, place = int(c), len(digits) - 1 - i
+        if not d: continue
+        if place == 1 and d <= 2: out += 'ยี่สิบ' if d == 2 else 'สิบ'
+        elif place == 0 and d == 1 and n > 1: out += 'เอ็ด'
+        else: out += _TH_DIGIT[d] + _TH_UNIT[place]
+    return out
+
+
+def th_norm(s):
+    """Thai text → a string to compare: digits (Thai or Arabic) as their reading; letters, vowels and tone marks kept (Thai vowels above and below
+    the line are marks, not letters); punctuation and spaces gone. เอ็ด is read as หนึ่ง and a leading หนึ่ง before a unit goes, so 120 and the
+    spoken ร้อยยี่สิบ, 101 and ร้อยหนึ่ง are the same."""
+    s = unicodedata.normalize('NFKC', s).lower().translate({0x0e50 + d: str(d) for d in range(10)})
+    s = re.sub(r'(?<=\d),(?=\d{3})', '', s)
+    s = re.sub(r'(\d+)\.(\d+)', lambda m: th_int(int(m[1])) + 'จุด' + ''.join(_TH_DIGIT[int(c)] for c in m[2]), s)
+    s = re.sub(r'\d+', lambda m: th_int(int(m[0])), s)
+    s = re.sub(r'\s*%', 'เปอร์เซ็นต์', s).replace('เอ็ด', 'หนึ่ง')
+    s = ''.join(c for c in s if unicodedata.category(c)[0] in 'LMN')
+    return re.sub('หนึ่ง(?=ร้อย|พัน|หมื่น|แสน|ล้าน)', '', s)   # after the spaces go: Whisper writes 1 ล้าน
+
+
+def th_check(want, got, threshold):
+    """Two Thai lines → (passed or not, why). Numbers are found in the readings, in order, and must all agree: a number heard wrong is only a
+    character or two off, which the similarity alone would let through. Then the similarity, by character."""
+    a, b = th_norm(want), th_norm(got)
+    na, nb = _TH_NUM.findall(a), _TH_NUM.findall(b)
+    if na != nb: return False, f"numbers {' '.join(na) or '-'} ≠ {' '.join(nb) or '-'}"
+    r = difflib.SequenceMatcher(None, a, b, autojunk=False).ratio() if (a or b) else 1.0
+    return r >= threshold, '' if r >= threshold else f'similarity {r:.2f} < {threshold}'
+
+
 def detect_lang(texts):
-    cjk = sum(len(CJK.findall(t)) for t in texts); latin = sum(len(re.findall('[A-Za-z]', t)) for t in texts)
+    cjk = sum(len(CJK.findall(t)) for t in texts); latin = sum(len(re.findall('[A-Za-z]', t)) for t in texts); thai = sum(len(THAI.findall(t)) for t in texts)
+    if thai and thai >= 0.3 * (thai + cjk + latin): return 'th'
     return 'zh' if cjk and cjk >= 0.3 * (cjk + latin) else 'en'
 
 
@@ -141,7 +190,9 @@ def compare(want, got, lang, threshold=0.92):
         # Bare numerals on the script's side are tried whole and digit by digit (二〇二六 / 2026; 三二一 / 3、2、1)
         tries = [zh_check(zh_tokens(want, True, dd), zh_tokens(got, dec, not dec), threshold) for dd in (False, True) for dec in (True, False)]
         return next((t for t in tries if t[0]), tries[0])
+    if lang == 'th': return th_check(want, got, threshold)
     a, b = norm_en(want), norm_en(got)
+    if not a and any(c.isalpha() for c in want): return False, f"no Latin words to compare; '{lang}' has no comparison here"   # not a pass: nothing was checked
     return a == b, ''
 
 
@@ -167,7 +218,7 @@ def main():
     lines = json.load(open(a.lines, encoding='utf-8'))
     want = {L['id']: L.get('asr', L['text']) for L in lines}
     lang = detect_lang(list(want.values())) if a.lang == 'auto' else a.lang
-    name = a.model or os.environ.get('WHISPER_MODEL') or {'en': 'base.en', 'zh': 'small'}.get(lang, 'base')
+    name = a.model or os.environ.get('WHISPER_MODEL') or {'en': 'base.en', 'zh': 'small', 'th': 'medium'}.get(lang, 'base')
     if lang != 'en' and os.path.basename(name.rstrip('/')).endswith('.en'):
         print(f"asr_check.py: model '{name}' is English-only but the lines are '{lang}'. Use a multilingual model (e.g. --model base or --model small).", file=sys.stderr); sys.exit(2)
     import numpy as np, soundfile as sf, soxr
