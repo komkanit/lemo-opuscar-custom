@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: Mali; font-weight: 400; src: url(fonts/Mali-Regular.ttf); }
+@font-face { font-family: Mali; font-weight: 500; src: url(fonts/Mali-Medium.ttf); }
+@font-face { font-family: Mali; font-weight: 600; src: url(fonts/Mali-SemiBold.ttf); }
+@font-face { font-family: Mali; font-weight: 700; src: url(fonts/Mali-Bold.ttf); }
+html, body { margin: 0; background: #000; overflow: hidden; }
+canvas { display: block; }
+</style></head>
+<body><canvas id="c"></canvas>
+<script type="module">
+await Promise.all(['400', '500', '600', '700'].map(w => document.fonts.load(`${w} 40px Mali`, 'กขค abc 123')));
+const q = new URLSearchParams(location.search);
+await import(q.get('frame') || q.get('sheet') ? './src/frames.js' : './src/film.js');   // ?frame=wipe|stop&lang=th|en, ?sheet=1: style frames
+window.READY = true;
+</script></body></html>

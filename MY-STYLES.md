@@ -8,9 +8,9 @@ Talk to the user in their language. Write the files in English, like the library
 
 ## Where it lives
 
-Until the user confirms it (§6), a style is a draft in the demo film's project folder. Confirmed styles live in **`~/lemo-my-styles/`**, outside the library, so library updates and uninstalling never touch them. `~/lemo-my-styles/README.md` lists every style, one row each (English and Chinese name, slug, base, one line on what it is, and the folder when it isn't in `~/lemo-my-styles/`): it's how a later session finds a style by name. If the user wants a style kept in another folder, keep it there and still add its row, with the full path, to `~/lemo-my-styles/README.md`.
+Until the user confirms it (§6), a style is a draft in the demo film's project folder. Confirmed styles live in **`my-styles/`** at the library root (`$LIB/my-styles/` in skill mode), committed with this repository so they keep their history. `my-styles/README.md` lists every style, one row each (English and Chinese name, slug, base, one line on what it is, and the folder when it isn't in `my-styles/`): it's how a later session finds a style by name. If the user wants a style kept in another folder, keep it there and still add its row, with the full path, to `my-styles/README.md`.
 
-Each style has its own folder, `~/lemo-my-styles/<slug>/`, shaped like a library style (`MAINTAINING.md` **Add a style**, without the gallery and the release):
+Each style has its own folder, `my-styles/<slug>/`, shaped like a library style (`MAINTAINING.md` **Add a style**, without the gallery and the release):
 
 | File | What it holds |
 |---|---|
@@ -23,7 +23,7 @@ Each style has its own folder, `~/lemo-my-styles/<slug>/`, shaped like a library
 | `styleframe-vs-base.jpg` | changing a library style only: the same frame, base on the left, theirs on the right |
 | `test.mp4`, `test.jpg` | the demo film and its poster |
 
-Never write into `styles/` or edit the library's guides for this. The name and slug must not match a library style or a row in `~/lemo-my-styles/README.md`.
+Never write into `styles/` or edit the library's guides for this. The name and slug must not match a library style or a row in `my-styles/README.md`.
 
 ## 1. Where to start
 
@@ -128,7 +128,7 @@ Then save it into `style/`:
 
 Show the user the demo film: where it is, and each change with the second where it can be seen. Then ask with `AskUserQuestion`:
 
-1. **Keep it as my style** (Recommended): check that the name and slug are still free, copy `style/` to `~/lemo-my-styles/<slug>/` (or the folder they want), add its row to `~/lemo-my-styles/README.md` (create it if it's missing: a title and a table with one row per style), and tell them where it is and how to use it ("Make a film in my <name> style about…").
+1. **Keep it as my style** (Recommended): check that the name and slug are still free, copy `style/` to `my-styles/<slug>/` (or the folder they want), add its row to `my-styles/README.md` (create it if it's missing: a title and a table with one row per style), and tell them where it is and how to use it ("Make a film in my <name> style about…").
 2. **One more round**: change what they ask (§7), then ask again.
 3. **Not now**: leave it in the project folder. Tell them its path, and that saying "keep the style in <path> as my style" later saves it then.
 
@@ -137,5 +137,5 @@ Only a kept style is theirs: listed when the skill starts, and found by name.
 ## 7. Revise or use it
 
 - **Not right yet**: change `STYLE.md` and `CHANGES.md`, then render the style frame and the demo film again and replace `demo/` and `DEMO.md`. Change only what the user asks.
-- **Using it**: find it through `~/lemo-my-styles/README.md`. Read its `STYLE.md` in place of a library `STYLE.md` and follow the normal workflow in `AGENTS.md`, treatment first, at the style's default size unless the user asks for another. For techniques, read the style's own `DEMO.md` and `demo/` first, then the base's (`$LIB/styles/<based_on>/DEMO.md`). The demo film is one example: never reuse its story, shots or timeline. The films are the user's: no LemoLab credit, no watermark.
+- **Using it**: find it through `my-styles/README.md`. Read its `STYLE.md` in place of a library `STYLE.md` and follow the normal workflow in `AGENTS.md`, treatment first, at the style's default size unless the user asks for another. For techniques, read the style's own `DEMO.md` and `demo/` first, then the base's (`$LIB/styles/<based_on>/DEMO.md`). The demo film is one example: never reuse its story, shots or timeline. The films are the user's: no LemoLab credit, no watermark.
 - **After a library update**: if the base `STYLE.md` changed since `library_version`, mention it once and offer to bring the useful fixes into their copy. Don't change their style without asking.

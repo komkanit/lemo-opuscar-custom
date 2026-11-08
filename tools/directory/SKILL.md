@@ -9,7 +9,7 @@ The styles, guides and tools ship with this plugin, in `library/` next to this f
 
 1. **Get the library ready.** Run `sh "<skill base directory>/scripts/setup.sh"`. It copies the bundled library to its working folder (default `~/.lemo-opuscar`, so installed packages survive plugin updates) and prints `LIB=<path>` on its last line.
 2. **Install the core tools early.** Start `sh "<skill base directory>/scripts/setup.sh" deps` right away, in the background if you can: it takes a few minutes the first time. Add `deps voice` or `deps music` later, only if the film needs them (`$LIB/TECHNIQUE.md` §1). Report missing system tools (Node, ffmpeg, Python) in your one round of questions; don't install system software yourself. Packages a style needs (its `STYLE.md` lists them) you install yourself, into the project folder.
-3. **Follow the library.** Read `$LIB/AGENTS.md` and do what it says, starting with **Start** (the user's own styles in `~/lemo-my-styles/` and series in `~/lemo-my-series/`; when they started the skill without writing anything, the language question first, then the ways in): finding the style or making their own, the one round of questions, the treatment, production and delivery.
+3. **Follow the library.** Read `$LIB/AGENTS.md` and do what it says, starting with **Start** (the user's own styles in `$LIB/my-styles/` and series in `$LIB/my-series/`; when they started the skill without writing anything, the language question first, then the ways in): finding the style or making their own, the one round of questions, the treatment, production and delivery.
 
 What changes in skill mode:
 

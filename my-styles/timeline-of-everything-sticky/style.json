@@ -1,0 +1,13 @@
+{
+  "slug": "timeline-of-everything-sticky",
+  "en": "Timeline of Everything · Sticky Figure",
+  "cn": "火柴人万物时间线",
+  "th": "ไทม์ไลน์ของทุกสิ่ง · ตัวก้าง",
+  "based_on": "scifi-toon",
+  "borrows": ["pixel-rpg", "midcentury-toon", "isometric-picture-book"],
+  "sizes": ["1920x1080", "1080x1920"],
+  "library_version": "eff3e17",
+  "created": "2026-11-08",
+  "line": "A stick figure walks in place while history scrolls past; clothes, ground and sky change at each era line, a date card rolls the years.",
+  "line_cn": "火柴人原地行走，历史从右向左流过；每过一条时代线，衣服、地面和天空随之改变，日期卡滚动着年份。"
+}

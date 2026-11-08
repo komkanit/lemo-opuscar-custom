@@ -137,7 +137,7 @@ agent 会读三份指南，像一个小工作室一样开工。<br>
 4. **一支 15–30 秒的 demo 片。** 每一处改动都在画面里出现，配音乐和音效。它自己检查、修一轮再交给你。
 5. **满意了再固化。** 它问你：固化、再改一轮，还是先不固化。你点头之前，一切都只在这次的项目文件夹里。
 
-固化以后，风格存在 `~/lemo-my-styles/<名字>/`，和库里的风格同一个结构：风格说明、改了什么、demo 片和它的源码，以后做片能接着用这些技法。之后像用库里的风格一样叫它的名字：“用我的**夜浮世绘**风格做一支 30 秒的片子，讲……”。挑风格时，你自己的风格排在最前面。
+固化以后，风格存在 `my-styles/<名字>/`，和库里的风格同一个结构：风格说明、改了什么、demo 片和它的源码，以后做片能接着用这些技法。之后像用库里的风格一样叫它的名字：“用我的**夜浮世绘**风格做一支 30 秒的片子，讲……”。挑风格时，你自己的风格排在最前面。
 
 库更新、重装 skill 都不会动它们。底子风格以后更新了，它会提一句，问你要不要把有用的修复同步过来。Claude 照着 [`MY-STYLES.md`](MY-STYLES.md) 一步步做。
 
@@ -163,7 +163,7 @@ claude plugin marketplace update lemolab && claude plugin update lemo-opuscar@le
 claude plugin uninstall lemo-opuscar@lemolab
 ```
 
-你自己的风格存在 `~/lemo-my-styles/`，系列设定（series bible）存在 `~/lemo-my-series/`，更新和卸载都不会删；不要了就自己删掉这些文件夹。
+你自己的风格存在库根目录的 `my-styles/`（随仓库提交），系列设定（series bible）存在 `my-series/`（已 gitignore，只留在本机）。更新不会动它们；重新 clone 会带上你的风格，但不会带上系列设定，`my-series/` 请自己备份。
 
 一直卡住就[提个 issue](https://github.com/lemomo-ai/lemo-opuscar/issues)。
 

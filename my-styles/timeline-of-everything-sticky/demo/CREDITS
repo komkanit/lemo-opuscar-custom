@@ -1,0 +1,18 @@
+Ancient Monuments · อนุสรณ์สถานโบราณ — demo film for the style "Timeline of Everything · Sticky Figure"
+
+Picture: drawn entirely in code (src/), no generated images.
+Facts and dates: the user's history atlas page "Ancient monuments" (Göbekli Tepe 10,000–9000 BCE, Stonehenge c. 2950–2500 BCE, Giza 2589–2504 BCE); used for facts only, none of its illustrations or text.
+
+Font
+- Mali by Cadson Demak — SIL Open Font License 1.1 (fonts/OFL.txt), via Google Fonts.
+
+Voice
+- ElevenLabs, model eleven_v4, premade voice ID XrExE9yKIg1WjnnlVkGX — generated with the user's own ElevenLabs account under its terms.
+
+Instrument samples (all CC0 1.0)
+- FreePats (freepats.zenvoid.org): ukulele, bagpipe, world percussion (tambourine).
+- VCSL — Versilian Community Sample Library: marimba, harp, glockenspiel, frame drum, shaker.
+- VSCO 2 Community Edition: cellos (pizzicato and sustained).
+
+Tools
+- Lemo-Opuscar core render and audio tools (core/render, core/audio, core/tts) — MIT License. Not copied into this folder; build.sh calls them from the library.

@@ -2,15 +2,15 @@
 
 A series is several films with the same characters, world, plot and style, made over many sessions. Its **series bible** holds everything that must stay the same from one episode to the next: who the characters are and how they look and sound, the main plot and where it has got to, the style and the format. You plan the bible with the user once, and every later session reads it before it makes the next episode. It lives outside the library and never changes it.
 
-Use this guide when the user wants a series, several episodes, a season or recurring characters ("a series about…", "episode 2 of…", "make the next episode", "ทำซีรีส์", "ตอนต่อไป", "做一个系列", "下一集"), or names a series in `~/lemo-my-series/`. Each episode is a film made with [`AGENTS.md`](AGENTS.md) as usual, with the exceptions this guide gives.
+Use this guide when the user wants a series, several episodes, a season or recurring characters ("a series about…", "episode 2 of…", "make the next episode", "ทำซีรีส์", "ตอนต่อไป", "做一个系列", "下一集"), or names a series in `my-series/`. Each episode is a film made with [`AGENTS.md`](AGENTS.md) as usual, with the exceptions this guide gives.
 
 Talk to the user in their language. Write the files in English, like the library, with names and every line of dialogue in the film's language.
 
 ## Where it lives
 
-Bibles live in **`~/lemo-my-series/`**, outside the library, so library updates and uninstalling never touch them. `~/lemo-my-series/README.md` lists every series, one row each: English and original name, slug, style, episodes made, one line on what it is, and the folder when it isn't in `~/lemo-my-series/`. It's how a later session finds a series by name. If the user wants a bible kept in another folder (inside their own project, say), keep it there and still add its row, with the full path.
+Bibles live in **`my-series/`** at the library root (`$LIB/my-series/` in skill mode). The folder is gitignored: bibles stay on this machine and are never pushed, and a pull leaves them alone. `my-series/README.md` lists every series, one row each: English and original name, slug, style, episodes made, one line on what it is, and the folder when it isn't in `my-series/`. It's how a later session finds a series by name. If the user wants a bible kept in another folder (inside their own project, say), keep it there and still add its row, with the full path.
 
-Each series has its own folder, `~/lemo-my-series/<slug>/`:
+Each series has its own folder, `my-series/<slug>/`:
 
 | File | What it holds |
 |---|---|
@@ -47,7 +47,7 @@ Each series has its own folder, `~/lemo-my-series/<slug>/`:
 }
 ```
 
-- `style.source` is `library` or `my-styles` (the user's own style, found through `~/lemo-my-styles/README.md`). A series has one style; an episode in another style is a spin-off, not an episode.
+- `style.source` is `library` or `my-styles` (the user's own style, found through `my-styles/README.md`). A series has one style; an episode in another style is a spin-off, not an episode.
 - `voice.engine` is `kokoro` (`core/tts/tts.py`), `edge` (`core/tts/tts_zh.py`) or `elevenlabs` (`core/tts/tts_11labs.py`); the other fields are that tool's line fields, copied into every line the character speaks. A character with no lines has no `voice`.
 - `library_version`: `git -C "$LIB" rev-parse --short HEAD`, or the plugin version when `$LIB` isn't a git clone.
 
@@ -88,7 +88,7 @@ Make the series' first project folder (`films/<slug>-ep01/` in a clone, `<slug>-
 
 ## 3. Write the bible
 
-When they approve: write `series.json`, `SERIES.md`, an empty `CONTINUITY.md` (a title and nothing established yet), each character's `MODEL.md`, `model-sheet.jpg`, the approved `rig.js` and `voice.wav`, `lexicon.tsv` if names need it, and what `shared/` holds so far. Check that the slug is free in `~/lemo-my-series/README.md`, copy the folder to `~/lemo-my-series/<slug>/` (or where they want it) and add its row, creating the README if it's missing. Tell them where it is and how to use it ("Make episode 1 of <name>", "make the next episode of <name>").
+When they approve: write `series.json`, `SERIES.md`, an empty `CONTINUITY.md` (a title and nothing established yet), each character's `MODEL.md`, `model-sheet.jpg`, the approved `rig.js` and `voice.wav`, `lexicon.tsv` if names need it, and what `shared/` holds so far. Check that the slug is free in `my-series/README.md`, copy the folder to `my-series/<slug>/` (or where they want it) and add its row, creating the README if it's missing. Tell them where it is and how to use it ("Make episode 1 of <name>", "make the next episode of <name>").
 
 Episode 1 may follow in the same session, through §4; the opening, the ending and the theme are usually built with it, then saved into `shared/`.
 

@@ -10,16 +10,16 @@ This repository is a library of film styles. Each style has a `styles/<slug>/STY
 | Directing: story, sound, rhythm, camera, maps, checks, delivery | [`DIRECTOR.md`](DIRECTOR.md) |
 | Building: install, pages, voice, music, mix | [`TECHNIQUE.md`](TECHNIQUE.md) |
 | Tool commands and flags | [`core/README.md`](core/README.md) |
-| The user wants to change a style and keep it as their own, or make their own style from a blank page, or names a style in `~/lemo-my-styles/` | [`MY-STYLES.md`](MY-STYLES.md) |
-| The user wants a series (several episodes with the same characters, plot and style), the next episode of one, or names a series in `~/lemo-my-series/` | [`SERIES.md`](SERIES.md) |
+| The user wants to change a style and keep it as their own, or make their own style from a blank page, or names a style in `my-styles/` | [`MY-STYLES.md`](MY-STYLES.md) |
+| The user wants a series (several episodes with the same characters, plot and style), the next episode of one, or names a series in `my-series/` | [`SERIES.md`](SERIES.md) |
 | Adding a style to the library (owner only) | [`MAINTAINING.md`](MAINTAINING.md) |
 
 **Films outside `styles/` are the user's: no LemoLab credit, no watermark.**
 
 ## Start
 
-- **Their own styles first.** If `~/lemo-my-styles/README.md` exists, read it: it lists every style the user has saved, wherever it's kept, and their own styles ([`MY-STYLES.md`](MY-STYLES.md)) count like library styles. When they name a style, look there first, then in the library.
-- **Their series.** If `~/lemo-my-series/README.md` exists, read it too: it lists every series bible the user has ([`SERIES.md`](SERIES.md)). When they name a series or ask for "the next episode", find it there.
+- **Their own styles first.** If `my-styles/README.md` exists, read it: it lists every style the user has saved, wherever it's kept, and their own styles ([`MY-STYLES.md`](MY-STYLES.md)) count like library styles. When they name a style, look there first, then in the library.
+- **Their series.** If `my-series/README.md` exists, read it too: it lists every series bible the user has ([`SERIES.md`](SERIES.md)). When they name a series or ask for "the next episode", find it there.
 - **Their language.** Talk to them in the language they write in. When they started the skill without writing anything, your first question is always the language, even when their settings, memory or earlier messages suggest one: the `AskUserQuestion` tool, a question of its own headed "Language 语言" with two options, 中文 and English (the tool adds Other, where they type any other language). Use it from then on, and as the film's default language.
 - **No request yet** (they only started the skill, or said hello): offer the ways in with one question, using the `AskUserQuestion` tool, in their language, with the first as the recommended one:
   1. a film in a library style (**Finding the style**);
@@ -85,7 +85,7 @@ Report progress in the user's language. If a step fails, read the error, fix the
 ## Where things go
 
 - The film's project folder is `films/<name>/` in a clone (ignored by git), or `<name>/` in the user's folder in skill mode (see the skill's `SKILL.md`). Wherever a guide says `films/<name>/`, read "the project folder". Work only there, unless the user asks you to work in their own project.
-- The user's own styles and series bibles live in `~/lemo-my-styles/` and `~/lemo-my-series/` (MY-STYLES.md, SERIES.md). Write there only as those guides say: keeping a style, writing a bible, updating it after an episode.
+- The user's own styles and series bibles live in `my-styles/` (committed) and `my-series/` (gitignored, local only) at the library root (MY-STYLES.md, SERIES.md). Write there only as those guides say: keeping a style, writing a bible, updating it after an episode.
 - Run `node core/…` and `sh tools/…` from the library root (`$LIB` in skill mode).
 - `core/` has ready-made tools (rendering, TTS, speech check, sampler, sfx, mux). Use them or your own stack, but don't edit `core/` or `styles/` for a user's film.
 - Never kill processes you didn't start. Don't leave background processes running.

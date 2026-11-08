@@ -137,7 +137,7 @@ Everyone wants something different: their own brand colours, logo, characters, t
 4. **A 15–30 second demo film.** Every change is on screen, with music and sound effects. It checks the film and fixes it once before handing it over.
 5. **Keep it when you're happy.** It asks: keep it as my style, another round, or not now. Until you say yes, everything stays in that project's folder.
 
-Once kept, the style lives in `~/lemo-my-styles/<name>/`, shaped like a library style: the style prompt, what changed, the demo film and its source, so later films can reuse the techniques. Then name it like any other style: *"Make a 30-second film in my **Night Ukiyo-e** style about…"*. When you pick a style, your own are listed first.
+Once kept, the style lives in `my-styles/<name>/`, shaped like a library style: the style prompt, what changed, the demo film and its source, so later films can reuse the techniques. Then name it like any other style: *"Make a 30-second film in my **Night Ukiyo-e** style about…"*. When you pick a style, your own are listed first.
 
 Library updates and reinstalling never touch them. When the base style is updated later, Claude mentions it once and asks whether to bring the useful fixes into your copy. The steps Claude follows are in [`MY-STYLES.md`](MY-STYLES.md).
 
@@ -163,7 +163,7 @@ Uninstall, then delete `~/lemo-opuscar`:
 claude plugin uninstall lemo-opuscar@lemolab
 ```
 
-Your own styles in `~/lemo-my-styles/` and series bibles in `~/lemo-my-series/` stay through updates and uninstalls; delete those folders yourself if you don't want them.
+Your own styles live in `my-styles/` (committed with the repository) and series bibles in `my-series/` (gitignored, kept only on your machine) at the library root. Updates leave both alone; a fresh clone has your styles but not your series, so back `my-series/` up yourself.
 
 If a step stays stuck, [open an issue](https://github.com/lemomo-ai/lemo-opuscar/issues).
 

@@ -138,3 +138,8 @@ styles/*/demo/**/*_try.py
 # Superseded first-round review frames; only those a doc or CREDITS names are re-included
 styles/*/demo/stills/*_v1*
 !styles/art-deco/demo/stills/kit_v2.jpg
+
+# The user's own series bibles stay local (not pushed); their own styles in /my-styles/ are committed
+/my-series/
+# Rebuild output of an own style's demo (build.sh writes it next to demo/)
+/my-styles/*/build/

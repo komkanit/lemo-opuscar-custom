@@ -27,7 +27,7 @@ Open Claude Code in a folder for your film, and ask:
 
 Name a style in English or Chinese, or describe your topic and let Claude suggest two or three. Claude asks you once, up front: anything about your topic it can't decide, whether you have your own voice, music or photos, and whether you want to see a storyboard first. Then it makes the film in a project folder where you started.
 
-To make a style your own, change a library style or start from a blank page: Claude plans it with you one question at a time (each with a recommended answer), shows you a style frame, makes a 15–30 second demo film, and keeps the style, with the film's source, in `~/lemo-my-styles/<name>/` (outside the plugin, so updates never touch it). After that, name your style like any other; start the skill without a request and your own styles are listed first.
+To make a style your own, change a library style or start from a blank page: Claude plans it with you one question at a time (each with a recommended answer), shows you a style frame, makes a 15–30 second demo film, and keeps the style, with the film's source, in `my-styles/<name>/` at the library root (committed with your copy of the library). After that, name your style like any other; start the skill without a request and your own styles are listed first.
 
 ## Before you start
 
