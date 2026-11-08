@@ -93,9 +93,12 @@ def call(method, path, body=None, query=None, tries=5):
 
 
 def fail(e, what):
-    if e.code in (401, 402, 403) or e.status in ('quota_exceeded', 'invalid_api_key', 'detected_unusual_activity'):
-        print(f'tts_11labs.py: ElevenLabs refused {what} ({e.code} {e.status}): {e.detail}\n'
-              f'  check the key in ELEVENLABS_API_KEY and the characters left on the plan.', file=sys.stderr); sys.exit(3)
+    if e.code in (401, 402, 403) or e.status in ('quota_exceeded', 'invalid_api_key', 'detected_unusual_activity', 'missing_permissions'):
+        hint = {'quota_exceeded': 'the plan has no characters left for this request.',
+                'missing_permissions': 'the key is restricted: give it that permission (elevenlabs.io → Developers → API keys → edit), '
+                                       'or, for a voice lookup, give voice IDs instead of names (no lookup needed).',
+                }.get(e.status, 'check the key in ELEVENLABS_API_KEY and the characters left on the plan.')
+        print(f'tts_11labs.py: ElevenLabs refused {what} ({e.code} {e.status}): {e.detail}\n  {hint}', file=sys.stderr); sys.exit(3)
     sys.exit(f'tts_11labs.py: ElevenLabs rejected {what} ({e.code}): {e.detail}')
 
 
