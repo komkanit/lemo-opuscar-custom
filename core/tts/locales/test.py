@@ -18,7 +18,7 @@ with tempfile.TemporaryDirectory() as d:
     open(a, 'w', encoding='utf-8').write('# series\nมะลิ\tมะ-ลิ\nACME\tแอค-มี่\n')
     open(b, 'w', encoding='utf-8').write('ACME\tเอ-ซี-เอ็ม-อี\tACME™\n')
     checks = [
-        (localize('ไป กทม. 2pm', 'th', 'say'), 'ไป กรุงเทพมหานคร บ่ายสองโมง'),
+        (localize('ไป กทม. 2pm', 'th', 'say'), 'ไป กรุงเทพมหานครบ่ายสองโมง'),
         (localize('ไป กทม. 2pm', 'th', 'sub'), 'ไป กทม. บ่าย 2 โมง'),
         (localize('มะลิ ที่ ACME', 'th', 'say', [a, b]), 'มะ-ลิ ที่ เอ-ซี-เอ็ม-อี'),
         (localize('มะลิ ที่ ACME', 'th', 'sub', [a, b]), 'มะลิ ที่ ACME™'),

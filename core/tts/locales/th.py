@@ -67,7 +67,14 @@ def rule_time(text, form):
         h, m = int(mo[1].translate(_THAI_DIGITS)), int((mo[2] or mo[3]).translate(_THAI_DIGITS))
         if not (h <= 23 and m <= 59): return mo[0]
         return clock(h, m, form)
-    return _24H.sub(h24, _AMPM.sub(ampm, text))
+    if form == 'sub': return _24H.sub(h24, _AMPM.sub(ampm, text))
+    # spoken form: a space in Thai text is a pause for the voice, so the time is joined to the Thai words on either side
+    # (ก่อน 6:00pm → ก่อนหกโมงเย็น, not ก่อน…หกโมงเย็น). A pause that is meant stays: write … or a comma, or give the line its own "say"
+    mark = lambda f: lambda mo: (lambda r: r if r == mo[0] else '\x01' + r + '\x02')(f(mo))
+    out = _24H.sub(mark(h24), _AMPM.sub(mark(ampm), text))
+    out = re.sub(r'(?<=[\u0e00-\u0e7f])[ \t]+\x01', '\x01', out)
+    out = re.sub(r'\x02[ \t]+(?=[\u0e00-\u0e7f])', '\x02', out)
+    return out.replace('\x01', '').replace('\x02', '')
 
 
 EXAMPLES_TIME = [
@@ -105,7 +112,11 @@ EXAMPLES_TIME = [
     ('12:15pm', 'เที่ยง 15 นาที', 'เที่ยงสิบห้านาที'),
     ('13:05', 'บ่ายโมง 5 นาที', 'บ่ายโมงห้านาที'),
     # in a sentence, with and without spaces
-    ('นัดกันตอน 2:30pm นะ', 'นัดกันตอน บ่าย 2 โมงครึ่ง นะ', 'นัดกันตอน บ่ายสองโมงครึ่ง นะ'),
+    ('นัดกันตอน 2:30pm นะ', 'นัดกันตอน บ่าย 2 โมงครึ่ง นะ', 'นัดกันตอนบ่ายสองโมงครึ่งนะ'),
+    ('ต้องหาน้ำจืดให้ได้ก่อน 6:00pm', 'ต้องหาน้ำจืดให้ได้ก่อน 6 โมงเย็น', 'ต้องหาน้ำจืดให้ได้ก่อนหกโมงเย็น'),
+    ('7:00am แล้วเหรอ… ฉันยังไม่ตาย', '7 โมงเช้า แล้วเหรอ… ฉันยังไม่ตาย', 'เจ็ดโมงเช้าแล้วเหรอ… ฉันยังไม่ตาย'),
+    ('เจอกัน 2pm, 3pm นะ', 'เจอกัน บ่าย 2 โมง, บ่าย 3 โมง นะ', 'เจอกันบ่ายสองโมง, บ่ายสามโมงนะ'),
+    ('meet at 2pm ok', 'meet at บ่าย 2 โมง ok', 'meet at บ่ายสองโมง ok'),
     ('รถออก14.00 น.ตรง', 'รถออกบ่าย 2 โมงตรง', 'รถออกบ่ายสองโมงตรง'),
     ('เจอกัน2pmนะ', 'เจอกันบ่าย 2 โมงนะ', 'เจอกันบ่ายสองโมงนะ'),
     # left alone
