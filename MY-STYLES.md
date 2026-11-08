@@ -27,6 +27,8 @@ Never write into `styles/` or edit the library's guides for this. The name and s
 
 ## 1. Where to start
 
+When the user came in through the ways in (AGENTS.md, **Start**) without saying which, ask first: change a library style, or start from a blank page.
+
 - **Change a library style.** The user names one (see **Finding the style** in `AGENTS.md`). If they haven't, do as **Finding the style** does for a film: the full list of library styles in your message, the gallery link, two or three suggestions on top when you know what they'll use it for, then a plain-text question asking them to type the name (not `AskUserQuestion`). One base only. If they want to mix two, take the one whose §1 *Essence* is closest as the base and take only what they want from the other, as changes (list it in `borrows`).
 - **Start from a blank page.** The user describes the look in their own words, or brings a picture or a film they like. Choose one library style as the **technique base** (the closest materials and engine: what the code will build on) and at most two to borrow moves from. Make that the first question: your choice and why in one line each, with the next closest as the other options.
 

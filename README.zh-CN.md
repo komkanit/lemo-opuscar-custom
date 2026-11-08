@@ -163,7 +163,7 @@ claude plugin marketplace update lemolab && claude plugin update lemo-opuscar@le
 claude plugin uninstall lemo-opuscar@lemolab
 ```
 
-你自己的风格存在 `~/lemo-my-styles/`，更新和卸载都不会删；不要了就自己删掉这个文件夹。
+你自己的风格存在 `~/lemo-my-styles/`，系列设定（series bible）存在 `~/lemo-my-series/`，更新和卸载都不会删；不要了就自己删掉这些文件夹。
 
 一直卡住就[提个 issue](https://github.com/lemomo-ai/lemo-opuscar/issues)。
 

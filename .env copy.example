@@ -1,0 +1,11 @@
+# Copy this file to .env (in the library root) and fill in what you use. git ignores .env; never commit a key.
+# A variable already set in your shell wins over this file.
+
+# ElevenLabs voices (core/tts/tts_11labs.py): elevenlabs.io → Developers → API keys
+ELEVENLABS_API_KEY=
+
+# Optional: default model for languages without their own default (Thai always defaults to eleven_v4)
+# ELEVENLABS_MODEL=eleven_multilingual_v2
+
+# Optional: another endpoint, e.g. a regional server
+# ELEVENLABS_BASE_URL=https://api.elevenlabs.io

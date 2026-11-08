@@ -17,6 +17,8 @@ The user gives a style and a topic, sometimes more (length, language, voice, mus
 
 Say it in the questions when it matters: a good Chinese voice uses Microsoft's online service (edge-tts) and needs a connection; offline, Kokoro reads Chinese but sounds plain (TECHNIQUE.md §4).
 
+When the film has a voice and the user has an ElevenLabs key (`ELEVENLABS_API_KEY` in the shell or in the library's `.env`, which `setup.sh deps` reports), offer ElevenLabs too: often the most natural voice, and for Thai the default choice (`eleven_v4`), but billed per character and the script goes to ElevenLabs, so only with their OK (TECHNIQUE.md §4).
+
 Requests that only change the plan:
 
 - **No voice, or no subtitles.** Drop those steps and say so in the treatment.

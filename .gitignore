@@ -1,5 +1,9 @@
 node_modules/
 .venv/
+# API keys: copy .env.example to .env (never committed)
+.env
+.env.*
+!.env.example
 __pycache__/
 .DS_Store
 # 模型与大素材（运行说明里给下载地址）

@@ -51,6 +51,8 @@ All four page tools take `--size WxH` (default `1920x1080`, even numbers) and `-
 |---|---|
 | `.venv/bin/python core/tts/tts.py lines.json out_dir` | Kokoro, offline. `lines.json` = `[{id, text, voice?, speed?, lang?}]` (defaults `af_bella`, `0.92`, `en-us`; Chinese: `"lang": "cmn"`, a `zf_*`/`zm_*` voice). Writes `<id>.wav` (24 kHz, trimmed) and `dur.json`. Needs a library path under 160 bytes (espeak-ng); it checks |
 | `.venv/bin/python core/tts/tts_zh.py lines.json out_dir [--voice zh-CN-XiaoxiaoNeural] [--rate +0%] [--pitch +0Hz]` | edge-tts (Microsoft), online; same outputs as `tts.py`. Per line: `voice`, `rate`, `pitch`, `say` (what is spoken when it differs from `text`). Caches in `out_dir/.cache/`. Voices: `.venv/bin/python -m edge_tts --list-voices` |
+| `.venv/bin/python core/tts/tts_11labs.py lines.json out_dir [--voice <id\|name>] [--model <id>] [--lexicon f.tsv …] [--dry-run]` | ElevenLabs, online and billed per character; same outputs as `tts.py`, plus `say.json` (what was spoken). Key in `ELEVENLABS_API_KEY` only. Per line: `voice` (ID or account voice name; no default), `lang` (ISO, sent as `language_code`), `model` (default: Thai `eleven_v4`, others `$ELEVENLABS_MODEL` or `eleven_multilingual_v2`), `stability`, `similarity`, `style`, `speed`, `speaker_boost` (`eleven_v4` takes only the first two), `seed`, `say`. Sends neighbouring lines of the same voice as context (`--no-context` turns that off). Prints the characters it will send; `--dry-run` stops there. Caches in `out_dir/.cache/`. Voices: `--list-voices [--search …]` |
+| `.venv/bin/python core/tts/localize.py lines.json [out.json] [--lexicon f.tsv …] [--lang th]` \| `--text "…"` | localization for voice and subtitles. Thai entries (`"lang": "th"` or Thai letters): `text` becomes the subtitle form (2:00pm, 14:00, 14.00 น. → บ่าย 2 โมง) and `say` the spoken form (บ่ายสองโมง), unless the entry has its own `say`. Works on `lines.json` and `cues.json`. `tts_zh.py`, `tts_11labs.py` and `asr_check.py` apply the spoken form by themselves and take the same `--lexicon`. Rules: `core/tts/locales/th.py`; word swaps: `core/tts/locales/th_words.tsv` (`written<TAB>say[<TAB>sub]`); tests: `python core/tts/locales/test.py` |
 | `.venv/bin/python core/tts/asr_check.py lines.json voices_dir [--lang en\|zh\|th\|auto] [--threshold 0.92] [--model base]` | speech-to-text check of every `<id>.wav`; writes `words.json` (word timestamps). English must match word for word (0–999 count the same as their words); Thai compares by character similarity ≥ `--threshold`, vowels and tone marks included, digits as their reading and every number exact (50 = ห้าสิบ); Thai `words.json` entries are pieces of words, not words. Chinese, Japanese, Korean compare by character similarity ≥ `--threshold`, each number by its value (十九 = 19, 一万九千 = 1.9万, 三点五 = 3.5, 百分之三十 = 30%); a number heard as a different number fails the line. An `asr` field in a line overrides the expected text (names, and in English decimals and times: write it as Whisper does) |
 | `core/audio/sfx.py` | procedural foley and mix helpers: filters, envelopes, `click`, `whoosh`, `thump`, `ding`…, `compress`, `limit`, `add(buf, sound, at, gain, pan)` |
 | `core/audio/sampler.py`, `core/audio/pluck.py` | sampled instruments and plucked-string modelling ([`audio/INSTRUMENTS.md`](audio/INSTRUMENTS.md)). A missing library is named in the error with its `fetch.sh instruments <lib>` command. `credits(names)` writes the CREDITS lines |
@@ -76,6 +78,9 @@ All four page tools take `--size WxH` (default `1920x1080`, even numbers) and `-
 | `LEMO_COLOR=bt709` | `mux.sh` writes limited-range BT.709 instead of the default full-range output |
 | `WHISPER_MODEL` | Whisper model name or local folder for `asr_check.py` (same as `--model`; default `base.en` for English, `small` for Chinese, `medium` for Thai, `base` otherwise) |
 | `HF_ENDPOINT` | Hugging Face mirror for the Whisper download |
+| `ELEVENLABS_API_KEY` | the user's ElevenLabs key, for `tts_11labs.py`: in the shell, or in `.env` at the library root (copy `.env.example`; git ignores `.env`). The shell wins. Never in a project file. `ELEVENLABS_MODEL` and `ELEVENLABS_BASE_URL` can go in `.env` too |
+| `ELEVENLABS_MODEL` | `tts_11labs.py`'s default model for languages without their own default (Thai: `eleven_v4`) |
+| `ELEVENLABS_BASE_URL` | another ElevenLabs endpoint (a regional server, a proxy); default `https://api.elevenlabs.io` |
 
 ## Exit codes
 
@@ -86,4 +91,6 @@ All four page tools take `--size WxH` (default `1920x1080`, even numbers) and `-
 | `mux.sh` | film written | any failure | – |
 | `tts.py`, `srt.py` | done | bad input, missing model, path too long | usage |
 | `tts_zh.py` | done | bad input | network unreachable |
+| `tts_11labs.py` | done | bad input, unknown voice, no key, a line rejected | network unreachable (3: key rejected or quota used up) |
+| `localize.py`, `locales/test.py` | done | bad input / a failing example | – |
 | `asr_check.py` | all lines pass | mismatches | model failed to load |

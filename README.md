@@ -163,7 +163,7 @@ Uninstall, then delete `~/lemo-opuscar`:
 claude plugin uninstall lemo-opuscar@lemolab
 ```
 
-Your own styles in `~/lemo-my-styles/` stay through updates and uninstalls; delete that folder yourself if you don't want them.
+Your own styles in `~/lemo-my-styles/` and series bibles in `~/lemo-my-series/` stay through updates and uninstalls; delete those folders yourself if you don't want them.
 
 If a step stays stuck, [open an issue](https://github.com/lemomo-ai/lemo-opuscar/issues).
 

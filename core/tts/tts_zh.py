@@ -2,6 +2,7 @@
     python core/tts/tts_zh.py lines.json out_dir [--voice zh-CN-XiaoxiaoNeural] [--rate +0%] [--pitch +0Hz]
 lines.json = [{"id":..., "text":..., "voice":"zh-CN-YunxiNeural", "rate":"+10%", "pitch":"-2Hz", "say":"..."}, ...]
   "say" (optional) = the text actually sent to be spoken, default "text" (for numbers and abbreviations written out as read; subtitles still use text).
+  Thai lines without "say" are localized first (core/tts/locales: 2:00pm → บ่ายสองโมง); --lexicon f.tsv adds a series' or project's word swaps.
   Also takes tts.py's "speed" (a multiplier, 1.1 → +10%). Voice list: python -m edge_tts --list-voices
 Output is the same as tts.py: out_dir/<id>.wav (24 kHz mono, leading/trailing silence trimmed) and out_dir/dur.json.
   The mp3s are cached in out_dir/.cache/; unchanged text/voice/rate is not fetched again (written to .part, then renamed, so Ctrl-C never
@@ -13,6 +14,8 @@ Exits with an error when the network is down or blocked (exit code 2; bad input 
 """
 import sys, io, json, os, re, asyncio, hashlib, subprocess, argparse
 import numpy as np, soundfile as sf
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from locales import line_forms
 SR = 24000
 
 
@@ -64,6 +67,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('lines'); ap.add_argument('out_dir')
     ap.add_argument('--voice', default='zh-CN-XiaoxiaoNeural'); ap.add_argument('--rate', default='+0%'); ap.add_argument('--pitch', default='+0Hz')
+    ap.add_argument('--lexicon', action='append', default=[])
     a = ap.parse_args()
     lines = json.load(open(a.lines, encoding='utf-8'))
     for L in lines:
@@ -76,7 +80,7 @@ def main():
     for n in os.listdir(os.path.join(a.out_dir, '.cache')):
         if n.endswith('.part'): os.remove(os.path.join(a.out_dir, '.cache', n))   # partial file left by an interrupted previous run
     for L in lines:
-        voice, rate, pitch, say = L.get('voice', a.voice), rate_of(L, a.rate), L.get('pitch', a.pitch), L.get('say', L['text'])
+        voice, rate, pitch, say = L.get('voice', a.voice), rate_of(L, a.rate), L.get('pitch', a.pitch), line_forms(L, a.lexicon)[1]   # Thai: localized
         key = hashlib.sha1(json.dumps([voice, rate, pitch, say], ensure_ascii=False).encode('utf-8')).hexdigest()[:16]
         mp3 = os.path.join(a.out_dir, '.cache', key + '.mp3')
         decoded = to_wav(mp3) if os.path.exists(mp3) else None

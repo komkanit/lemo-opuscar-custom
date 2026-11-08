@@ -1,0 +1,5 @@
+# Thai word swaps: written<TAB>say[<TAB>sub]
+# say = what the voice reads; sub = what the subtitle shows (leave it out to keep the written form).
+# Runs before the rules in th.py, longest written form first, as a plain substring swap: pick written forms that can't be part of a
+# longer word (an abbreviation with its dot, a name). A project or series adds its own file with --lexicon; theirs wins.
+กทม.	กรุงเทพมหานคร

@@ -2,6 +2,8 @@
 Compares each line's text with its transcription (0.6 s of silence is padded on both sides first; short lines are misheard without it) and
 writes per-word timestamps to voices_dir/words.json (for lip sync and line breaks).
 A line in lines.json may carry an "asr" field that overrides the expected text (proper names, onomatopoeia, a word Whisper always hears as another).
+A Thai line without "asr" is expected to sound like what the TTS tools spoke: its "say", or else its text localized (core/tts/locales: 2:00pm →
+บ่ายสองโมง, กทม. → กรุงเทพมหานคร). Pass the same --lexicon files as to the TTS tool.
 --lang  auto (default) decides by whether the text contains CJK or Thai characters. en requires an exact word-by-word match after dropping punctuation
         and case (whole numbers 0–999 are turned into words on both sides, so "forty" and "40" match; larger numbers, years, ordinals like 3rd and
         numbers with punctuation (3.5, 1:30, 1,000, 40%) are not, so write the expected transcription in the "asr" field). zh (also ja / ko) compares
@@ -196,6 +198,17 @@ def compare(want, got, lang, threshold=0.92):
     return a == b, ''
 
 
+def expected(L, lexicons=(), lang=None):
+    """What the line should sound like: its "asr"; for a Thai line, what the TTS tools spoke (its "say", or its text localized); else its text."""
+    if 'asr' in L: return L['asr']
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from locales import line_forms, lang_of
+    if lang_of(L, lang) == 'th':
+        try: return line_forms(L, lexicons, lang)[1]
+        except ValueError as e: sys.exit(f'asr_check.py: {e}')
+    return L['text']
+
+
 def load_model(name):
     try: from faster_whisper import WhisperModel
     except ImportError: sys.exit('asr_check.py: faster-whisper is missing: install the voice tier: sh plugin/skills/lemo-opuscar/scripts/setup.sh deps voice')
@@ -214,9 +227,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('lines'); ap.add_argument('voices_dir')
     ap.add_argument('--lang', default='auto'); ap.add_argument('--model'); ap.add_argument('--threshold', type=float, default=0.92)
+    ap.add_argument('--lexicon', action='append', default=[])
     a = ap.parse_args()
     lines = json.load(open(a.lines, encoding='utf-8'))
-    want = {L['id']: L.get('asr', L['text']) for L in lines}
+    want = {L['id']: expected(L, a.lexicon, None if a.lang == 'auto' else a.lang) for L in lines}
     lang = detect_lang(list(want.values())) if a.lang == 'auto' else a.lang
     name = a.model or os.environ.get('WHISPER_MODEL') or {'en': 'base.en', 'zh': 'small', 'th': 'medium'}.get(lang, 'base')
     if lang != 'en' and os.path.basename(name.rstrip('/')).endswith('.en'):

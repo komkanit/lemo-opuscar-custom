@@ -19,7 +19,7 @@ REPO = 'https://github.com/lemomo-ai/lemo-opuscar'
 GALLERY = 'https://lemomo-ai.github.io/lemo-opuscar/'
 
 # what the library keeps (git pathspecs); core/assets/polyhaven models are only used by demo code, which isn't bundled
-KEEP = ['AGENTS.md', 'DIRECTOR.md', 'TECHNIQUE.md', 'MY-STYLES.md', 'LICENSE', 'package.json', 'package-lock.json',
+KEEP = ['AGENTS.md', 'DIRECTOR.md', 'TECHNIQUE.md', 'MY-STYLES.md', 'SERIES.md', 'LICENSE', '.env.example', 'package.json', 'package-lock.json',
         'requirements.txt', 'requirements-voice.txt', 'requirements-music.txt', 'core', 'tools/fetch.sh',
         'tools/assets.json', 'styles/README.md', 'styles/*/STYLE.md', 'styles/*/style.json', 'styles/*/DEMO.md']
 DROP = ['core/assets/polyhaven/desk_lamp_arm_01/', 'core/assets/polyhaven/tea_set_01/', 'styles/_template/',
