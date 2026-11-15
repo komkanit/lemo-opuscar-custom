@@ -19,7 +19,7 @@ REPO = 'https://github.com/lemomo-ai/lemo-opuscar'
 GALLERY = 'https://lemomo-ai.github.io/lemo-opuscar/'
 
 # what the library keeps (git pathspecs); core/assets/polyhaven models are only used by demo code, which isn't bundled
-KEEP = ['AGENTS.md', 'DIRECTOR.md', 'TECHNIQUE.md', 'MY-STYLES.md', 'SERIES.md', 'LICENSE', '.env.example', 'package.json', 'package-lock.json',
+KEEP = ['AGENTS.md', 'DIRECTOR.md', 'TECHNIQUE.md', 'MY-STYLES.md', 'SERIES.md', 'LICENSE', 'REUSE.toml', '.env.example', 'package.json', 'package-lock.json',
         'requirements.txt', 'requirements-voice.txt', 'requirements-music.txt', 'core', 'tools/fetch.sh',
         'tools/assets.json', 'styles/README.md', 'styles/*/STYLE.md', 'styles/*/style.json', 'styles/*/DEMO.md']
 DROP = ['core/assets/polyhaven/desk_lamp_arm_01/', 'core/assets/polyhaven/tea_set_01/', 'styles/_template/',
@@ -29,6 +29,36 @@ DROP = ['core/assets/polyhaven/desk_lamp_arm_01/', 'core/assets/polyhaven/tea_se
 # the pack on the "assets" release with the three walnut textures, unchanged from main (added to this edition's assets.json)
 TEXTURES = {'file': 'textures.tar', 'size': 7249920, 'sha256': 'a1cc326f704e1cb9ef87c38bc3906a934c432676bd8193a3ed0f33cfc5719ada'}
 ICON = 'opuscar-trophy.png'   # not icon.png: the portal matches a doc's word "icon" to a file called icon.png
+# the licence texts this edition's files use (code, docs, the fonts in core/fonts); it has no films, stills or other
+# third-party files. They go into LICENSES/ at the plugin's root and the library's, each next to a copy of LICENSE, whose
+# opening line is changed to say so and to point to the repository for the other texts it names (LICENSE_EDIT).
+LICENSES = ['MIT', 'CC-BY-NC-4.0', 'OFL-1.1']
+LICENSE_EDIT = ('This file says which licence applies to what. The full licence texts are in '
+                'LICENSES/ (also at https://github.com/lemomo-ai/lemo-opuscar/tree/main/LICENSES).',
+                'This file says which licence applies to what. This edition carries the texts '
+                'of the licences its files use (MIT, CC BY-NC 4.0, OFL 1.1) in LICENSES/; the '
+                'full texts of all the licences named here are at '
+                'https://github.com/lemomo-ai/lemo-opuscar/tree/main/LICENSES.')
+# the plugin's own files in the REUSE format; the library keeps the repository's REUSE.toml, which covers its files
+REUSE_ROOT = '''# The plugin's own files. The library (skills/lemo-opuscar/library/) has its own REUSE.toml. LICENSE says which
+# licence applies to what.
+version = 1
+SPDX-PackageName = "Lemo-Opuscar"
+SPDX-PackageSupplier = "Lemomo (LemoLab)"
+SPDX-PackageDownloadLocation = "https://github.com/lemomo-ai/lemo-opuscar"
+
+[[annotations]]
+path = [".claude-plugin/**", "skills/lemo-opuscar/scripts/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Lemomo (LemoLab)"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["*.md", "skills/lemo-opuscar/*.md"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Lemomo (LemoLab)"
+SPDX-License-Identifier = "CC-BY-NC-4.0"
+'''
 
 SETUP_OLD = 'plugin/skills/lemo-opuscar/scripts/setup.sh'
 EDGE_CONSENT = ('it sends the narration text to Microsoft, so in this edition use it only when the user asks for it '
@@ -98,7 +128,7 @@ EDITS = [
 ]
 
 # fetch.sh runs its Python from a here-document, which the portal reads as "download and run": ship that Python as a file
-FETCH_HEREDOC = re.compile(r'^"\$PY" - \$PACKS <<\'PY\'\n(.*?)^PY\n', re.S | re.M)
+FETCH_HEREDOC = re.compile(r'^"\$PY" ((?:-X \S+ )*)- \$PACKS <<\'PY\'\n(.*?)^PY\n', re.S | re.M)   # keeps options such as -X utf8
 
 
 def die(msg):
@@ -147,7 +177,14 @@ def build(version):
     os.makedirs(os.path.join(OUT, 'skills/lemo-opuscar/scripts'), exist_ok=True)
     shutil.copy2(os.path.join(src, 'setup.sh'), os.path.join(OUT, 'skills/lemo-opuscar/scripts/setup.sh'))
     shutil.copy2(os.path.join(src, 'SECURITY.md'), os.path.join(OUT, 'SECURITY.md'))
-    shutil.copy2(os.path.join(ROOT, 'LICENSE'), os.path.join(OUT, 'LICENSE'))
+    lic = open(os.path.join(ROOT, 'LICENSE'), encoding='utf-8').read()
+    if lic.count(LICENSE_EDIT[0]) != 1: die('LICENSE: its opening lines changed (update LICENSE_EDIT in tools/directory.py)')
+    for d in (OUT, os.path.join(OUT, LIB)):
+        open(os.path.join(d, 'LICENSE'), 'w', encoding='utf-8').write(lic.replace(*LICENSE_EDIT))
+    for d in (OUT, os.path.join(OUT, LIB)):
+        os.makedirs(os.path.join(d, 'LICENSES'), exist_ok=True)
+        for spdx in LICENSES: shutil.copy2(os.path.join(ROOT, 'LICENSES', f'{spdx}.txt'), os.path.join(d, 'LICENSES', f'{spdx}.txt'))
+    write('REUSE.toml', REUSE_ROOT)
     os.makedirs(os.path.join(OUT, '.claude-plugin'), exist_ok=True)
     shutil.copy2(os.path.join(src, ICON), os.path.join(OUT, '.claude-plugin', ICON))
     add_textures_pack()
@@ -169,7 +206,7 @@ def build(version):
         'documentationUrl': f'{REPO}#how-to-use',                     # else the portal picks the first link in our README
         'privacyPolicyUrl': f'{REPO}/blob/directory/README.md#privacy-and-outside-services',
         'keywords': ['video', 'film', 'animation', 'motion-graphics', 'explainer', 'film-styles', 'code-generated-video'],
-        'license': 'MIT',
+        'license': 'MIT AND CC-BY-NC-4.0 AND OFL-1.1',   # code MIT, docs CC BY-NC 4.0, the fonts in core/fonts OFL (LICENSE); no films or stills
         'icon': f'.claude-plugin/{ICON}',
     }
     write('.claude-plugin/plugin.json', json.dumps(plugin, indent=2, ensure_ascii=False) + '\n')
@@ -186,8 +223,8 @@ def split_fetch():
     m = FETCH_HEREDOC.search(s)
     if not m or len(FETCH_HEREDOC.findall(s)) != 1: die('tools/fetch.sh: the here-document that runs its Python is gone (update split_fetch in tools/directory.py)')
     head = '# Downloads the asset packs named on the command line from the "assets" release; run by tools/fetch.sh.\n'
-    with open(os.path.join(OUT, LIB, 'tools', 'fetch.py'), 'w', encoding='utf-8') as f: f.write(head + m.group(1))
-    with open(sh, 'w', encoding='utf-8') as f: f.write(s[:m.start()] + '"$PY" tools/fetch.py $PACKS\n' + s[m.end():])
+    with open(os.path.join(OUT, LIB, 'tools', 'fetch.py'), 'w', encoding='utf-8') as f: f.write(head + m.group(2))
+    with open(sh, 'w', encoding='utf-8') as f: f.write(s[:m.start()] + '"$PY" ' + m.group(1) + 'tools/fetch.py $PACKS\n' + s[m.end():])
 
 
 def add_textures_pack():
@@ -200,10 +237,16 @@ def add_textures_pack():
 
 
 def check():
-    """The directory's automatic checks that can be run here, plus our own rule: no personal info."""
+    """The directory's automatic checks that can be run here, plus our own rule: no personal info (the one exception is the
+    business address that the README gives for commercial licences)."""
     bad = []
     # the maintainer's home folder is read here at run time, so no name is written into this file
-    pat = re.compile('|'.join([re.escape(os.path.expanduser('~')), r'[\w.+-]+@gmail\.com', r'/Users/', r'\.DS_Store']))
+    pat = re.compile('|'.join([re.escape(os.path.expanduser('~')), r'(?<![\w.+-])(?!lemomo\.studio@gmail\.com\b)[\w.+-]+@gmail\.com',
+                               r'/Users/', r'\.DS_Store']))
+    # the library's package.json points to its LICENSE, which this edition carries
+    pkg = json.load(open(os.path.join(OUT, LIB, 'package.json'), encoding='utf-8'))
+    if pkg.get('license') != 'SEE LICENSE IN LICENSE' or not os.path.exists(os.path.join(OUT, LIB, 'LICENSE')):
+        bad.append(f'{LIB}/package.json: "license" must be "SEE LICENSE IN LICENSE", next to the edition\'s LICENSE')
     for d, _, ns in os.walk(OUT):
         for n in ns:
             p = os.path.join(d, n); rel = os.path.relpath(p, OUT); size = os.path.getsize(p)

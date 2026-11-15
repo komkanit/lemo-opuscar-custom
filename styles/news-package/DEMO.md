@@ -81,7 +81,7 @@ Times in seconds; cuts and wipes on the 120 BPM grid (beat 0 = 1.5 s).
 - **Story ④:** lifts to G major with a brass stab and a glockenspiel figure.
 - **Recap and end card:** a glockenspiel note per tick, then a timpani roll into an E-major tutti on the end card.
 - **Voice:** Doubao TTS 2.0, voice 解说小明 2.0 (`zh_male_jieshuoxiaoming_uranus_bigtts`), eight lines, `speech_rate` 0–15.
-  - It is the closest of the three male 2.0 voices tried (云舟 `m191`, 大壹 `dayi`, 解说小明) to a brisk broadcast read. It reads briskly, in a steady mid-low register.
+  - Use it rather than 云舟 `m191` or 大壹 `dayi`: of the three male 2.0 voices it is the closest to a brisk broadcast read. It reads briskly, in a steady mid-low register.
   - Spoken text in `vo/lines.json` writes numbers as Chinese words (`say`); the strap and subtitles keep the digits.
   - Speech-to-text hears 海力士 as 海利市 and 都柏林 as 督伯林 (same sounds); those lines carry the expected transcript in their `asr` field.
   - Music is ducked ≈ 7 dB and thinned in 1.2–5 kHz under speech.
@@ -114,13 +114,13 @@ demo/
   index.html, main.js     the page; SCENES and WIPES tables; EV for the mix; CUES for the .srt
   mix.py                  score (sampled), foley from events.json, voice, ducking
   vo/lines.json           narration: text (screen/subtitles), say (spoken), speech_rate, asr
-  data/                   KOSPI daily closes (CSV + raw API responses)
+  prompts/                the plate prompts (<name>.txt + common.txt), run by tools/gen_plates.sh
   assets/plates/          the two illustrative plates (AI-generated JPEGs, committed; the build stops if one is missing)
   tools/prep.py           plate grade (duotone) → assets/plate_*.jpg + Natural Earth → Europe projection (EU members as shapes, all other land merged, no borders)
   tools/tts_doubao.py     optional Doubao TTS client (reads DOUBAO_API_KEY from the environment; caches takes)
   tools/fonts.sh          OFL subsets for every character in main.js
   tools/subs.py           CUES → ../news-package.srt
-  tools/gen_plates.sh, gen_image.py   make new plates with the Codex CLI (optional; see STYLE.md §10)
+  tools/gen_plates.sh   make new plates with the Codex CLI through core/image/gen_image.py (optional; see STYLE.md §10)
   tools/footage.py        footage finder with licence logging (not needed here)
   FACTS.md, SOURCES.md, CREDITS
 ```
@@ -158,10 +158,10 @@ The voice is optional equipment: with no Doubao key, write the same lines for Ko
 
 ### Demo-specific choices and pitfalls
 
-- **Rebuilt from the first short cut.** This version was rebuilt from the user's first short Chinese cut. An intermediate cut added a virtual studio, numbered slat bumpers and a locator map; the user preferred the plain bulletin, and they were removed.
-- **Plates are committed.** The plates were generated once and are committed as JPEGs, so a clone builds the same film.
-- **Story ③ was cut back twice:**
-  - The Commission's own speeches contradicted "for the first time" and "no fines".
-  - The incident details behind the requests come from a single report about real companies, so they stay out of picture and voice.
+- **Keep it a plain bulletin.** No virtual studio, no numbered slat bumpers, no locator map.
+- **Commit the plates.** Generate them once and commit the JPEGs, so a clone builds the same film.
+- **Keep story ③ to what the sources support:**
+  - Don't say "for the first time" or "no fines": the Commission's own speeches contradict both.
+  - Keep the incident details behind the requests out of picture and voice: they come from a single report about real companies.
 - **"Bear market" depends on the peak.** From June's record close the Kospi had been more than 20 % down since July. The film uses the September high, as the report does, and says so on the axis.
 - **Story ④ says "open weights", not "open source".** The licence has limited commercial terms. "Most capable" is Meta's own claim and is not reported.

@@ -14,7 +14,7 @@ mix (duck, compress, balance) ──► mux with ffmpeg, two-pass loudnorm −14
 
 ## 1. Requirements and install
 
-System tools, which the user installs: **Node 20+**, **ffmpeg 7+** (6.x under-reports audio length through `loudnorm`, and `mux.sh` then rejects the file as cut off), and **Python 3.11+** or [uv](https://docs.astral.sh/uv/). Developed on macOS (Apple silicon); Linux should work; on Windows use WSL. 3D and shader-heavy styles want a GPU.
+System tools, which the user installs: **Node 20+**, **ffmpeg 7+** (6.x under-reports audio length through `loudnorm`, and `mux.sh` then rejects the file as cut off), and **Python 3.11+** or [uv](https://docs.astral.sh/uv/). Developed on macOS (Apple silicon); Linux should work. On Windows, Git Bash (part of Git for Windows) works: run the same `sh` commands there; WSL also works. 3D and shader-heavy styles want a GPU.
 
 Everything else installs in tiers, from the library root (`$LIB` in skill mode). Install a tier only when the film needs it:
 
@@ -28,7 +28,9 @@ Everything else installs in tiers, from the library root (`$LIB` in skill mode).
 
 Some styles need packages of their own (a LiDAR reader, a slide-scan decoder, a CAD importer); the style's `STYLE.md` lists them. They are packages, not system tools: install them yourself into a private venv or `node_modules` in the project folder, never into `$LIB/.venv`.
 
-A synthesized score needs no big download; `sampler.py` names the library to fetch when an instrument is missing. A pack needs about twice its size free while it unpacks. Downloads come from npm, PyPI, GitHub Releases and Hugging Face (`HF_ENDPOINT` sets a mirror).
+The styles marked ✦ also draw with an image generator, which the library doesn't include and you don't install: the user's own Codex CLI, signed in (`core/image/gen_image.py`), or another image tool they have. Their prompts go to that service (core/README.md, "Image generation").
+
+A synthesized score needs no big download. A sampled one needs the libraries its instruments live in: `sampler.py` downloads the missing ones itself, all at once, when the score is rendered (`LEMO_FETCH=0` turns that off and prints the `fetch.sh` commands instead). Put `"$LIB/.venv/bin/python" core/audio/sampler.py --need <your mix.py>` at the top of a `build.sh`, so they arrive before the long picture render, not after it. A pack needs about twice its size free while it unpacks. Downloads come from npm, PyPI, GitHub Releases and Hugging Face (`HF_ENDPOINT` sets a mirror).
 
 ## 2. The picture is a function of time
 
@@ -39,7 +41,7 @@ window.DUR = 54.2;                 // seconds
 window.render = (t) => { ... };    // draw the frame at time t, deterministic
 window.READY = true;               // set once fonts and images are loaded
 window.EV = [{t, type, ...}];      // optional: sound / cue events for the mixer
-window.TEXTS = (t) => [{id, text, x0, y0, x1, y1}];   // optional: every text visible at t, for readcheck
+window.TEXTS = (t) => [{id, text, x0, y0, x1, y1}];   // optional: every text visible at t, for readcheck (pass: true = not meant to be read in full: a sign passed by, fine-print credits)
 ```
 
 **Paths:** pages reach library files with absolute URLs (`/core/lib.js`, `/node_modules/three/build/three.module.js`); scripts and `build.sh` use `$LIB`. Never `../..`.
@@ -144,7 +146,7 @@ Write an original score from the cue map, in the instruments of the style's soun
 
 ## 11. Assets, credits and fonts
 
-Only CC0, CC BY or OFL material, each listed in the film's `CREDITS` with its source and licence; `core/audio/sampler.py credits(names)` writes the lines for the instruments you used. Public-domain works count as CC0; "no known restrictions" does not. Data or images under other open licences (ODbL, CC BY-SA, open-hardware licences) only after you have named the licence and its terms (attribution, share-alike) to the user and they agree. The user's own material is fine as it is.
+Only CC0, CC BY or OFL material, each listed in the film's `CREDITS` with its source and licence; `core/audio/sampler.py credits(names)` writes the lines for the instruments you used. Public-domain works count as CC0; "no known restrictions" does not. Data or images under other open licences (ODbL, CC BY-SA, open-hardware licences) only after you have named the licence and its terms (attribution, share-alike) to the user and they agree. The user's own material is fine as it is. Images from an image generator (the ✦ styles) are listed too: which tool and model made them, that they are generated, and where the prompts are kept; drawings the user made are credited to them.
 
 ### Generated images (ChatGPT, through the user's Chrome)
 
@@ -162,7 +164,7 @@ When the user has a ChatGPT subscription and agrees, stills can be made in their
 - **Stop and hand over** on a sign-in page, a captcha or human check, or a limit message; never work around them.
 - **Credit** each film: `chatgpt_images.py credits images.json` writes the CREDITS line.
 
-A film that states facts (the Evidence Films styles) keeps a `FACTS.md` in the project folder: each claim with its source URL and the quoted wording, or the measurement that produced it.
+A film that states facts (a style built from real data or scans: its `STYLE.md` says so) keeps a `FACTS.md` in the project folder: each claim with its source URL and the quoted wording, or the measurement that produced it.
 
 Fonts: Google Fonts (OFL), self-hosted in the project. The typefaces a `STYLE.md` names are not in the library; download them (`https://github.com/google/fonts/tree/main/ofl/<family>`) into the project's `fonts/`. `core/fonts/` holds a few Latin display fonts and a Chinese display font with only about 200 glyphs, not enough for running Chinese text. For Chinese, subset a CJK font to the characters you use: the Google Fonts CSS API with `&text=` returns just those glyphs (`https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700&text=<URL-encoded characters>`). Download the font file it points to into the project's `fonts/` and load it with `@font-face`; don't link Google Fonts at render time.
 

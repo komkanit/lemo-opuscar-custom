@@ -42,7 +42,7 @@ Film time; dissolves are 0.6 s.
 - Glockenspiel: one note per window, rising D5–F♯6 at the halt, the same notes falling at the terminus. A bowed-vibraphone note under the lamp.
 - Flute tune over the harp on the viaduct and again by the river; strings tremolo in D minor into the tunnel, cut to silence for the blink; an open D major chord with a harp sweep on the way out; solo violin and strings at the sea; harp and strings under the end card.
 - Foley: snow wind, river, sea, room tone; lamp clicks, horn (two detuned saws, band-passed), brake hiss, wheel clacks and rumble, whooshes in and out of the tunnel, paper for the ticket. Everything stops during the blink.
-- Mix (`demo/mix.py`): voice compressed, RMS −18 dB; music ducked 5 dB under speech with a 300 Hz–4 kHz dip; peak-limited; `core/render/mux.sh` to −14 LUFS, true peak −1.2 dB.
+- Mix (`demo/mix.py`): voice compressed, RMS −18 dB; music ducked 5 dB under speech with a 300 Hz–4 kHz dip; peak-limited; `core/render/mux.sh` to −14 LUFS, true peak ≤ −1 dBTP.
 - Instruments from VSCO 2 CE, VCSL (CC0) and Salamander Grand Piano (CC BY 3.0) through `core/audio/sampler.py`.
 
 ## Palette & props
@@ -55,12 +55,12 @@ Film time; dissolves are 0.6 s.
 ## Titles, subtitles & end card
 
 - Subtitles: one Chinese line (Noto Serif SC 500, 40 px) over one English line (Cormorant Garamond 600, 42 px), warm off-white, 64 px from the bottom, on the dark front band, with a faint dark band (`#sub .band`). `demo/tools/subcheck.py` measures the ground under every cue: 98 % or more of the non-text pixels are dark in this film. The last line stays to the end.
-- End card: a paper ticket on a thread drops from above at 47.5 s, overshoots and swings to rest. Main panel: a route line `FROM PINE HALT → TO SEA END`, the title (English largest, then 末班夜车), a rule, the style name 纸雕灯影 / Paper-cut Lightbox, and `LemoLab × Claude Opus 5.5` on its own line; notched corners, a punched hole top left, a perforated stub with a red 车 stamp. The sign-off belongs to the library's own demos: a user's film carries no LemoLab credit and no copy of this card.
+- End card: a paper ticket on a thread drops from above at 47.5 s, overshoots and swings to rest. Main panel: a route line `FROM PINE HALT → TO SEA END`, the title (English largest, then 末班夜车), a rule, the style name 纸雕灯影 / Paper-cut Lightbox, and `LemoLab × Claude Opus 5.5` on its own line, with the licence credit for the Salamander piano samples (CC BY 3.0) in fine print under it; notched corners, a punched hole top left, a perforated stub with a red 车 stamp. The sign-off belongs to the library's own demos: a user's film carries no LemoLab credit and no copy of this card.
 
-## Pitfalls we hit
+## Pitfalls
 
 - A sky panel of fixed width shows its edge in a travelling shot: move it with the camera.
-- Light over text: a lamp flare covered the PINE HALT board at first; every board now sits clear of lamps and the headlight.
+- Light over text: a lamp flare drowns a name board. Keep every board clear of lamps and the headlight.
 - Subtitles over a lit window wash out: keep the bottom band dark, or use the faint band.
 - A long black reads as a broken film: the tunnel blink is 0.27 s, sound included.
 - Wide frames with the train as a thin dotted line in the middle and empty dark below look thin: fill the frame with layers (a foreground silhouette, a slope or a town behind, a curve in the line) and get close at the moments that matter.
