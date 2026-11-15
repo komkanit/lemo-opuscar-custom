@@ -67,6 +67,19 @@ All four page tools take `--size WxH` (default `1920x1080`, even numbers) and `-
 | `core/fonts/` | Fredoka, Lilita One, IM Fell English, ZCOOL KuaiLe (OFL, [`fonts/OFL.md`](fonts/OFL.md)) as subsets; ZCOOL holds only ≈ 200 characters |
 | `core/assets/polyhaven/` | CC0 HDRIs and models (`SOURCES.md`) |
 
+## Generated images (ChatGPT)
+
+The agent makes the image in the user's ChatGPT through Claude in Chrome (TECHNIQUE.md §11); this tool handles the files.
+
+| Command | What it does |
+|---|---|
+| `.venv/bin/python core/assets/chatgpt_images.py status images.json` | each image: done, started or missing; the chat and project links |
+| `… start images.json <id>` | records the start time and prints where to open (the film's chat, else `CHATGPT_PROJECT_URL`) and the exact prompt to type |
+| `… ingest images.json <id> [--chat URL] [--file F] [--downloads ~/Downloads] [--keep]` | takes the newest image in Downloads since `start` (any name: ChatGPT names its files), saves the original as PNG in `<out>/src/`, crops and scales it to `size` as `<out>/<id>.png`, logs prompt, chat, sizes and hash in `<out>/images.log.json` and removes the download (`--keep` leaves it). `--chat` is remembered for the next images |
+| `… credits images.json` | the CREDITS line for the images made |
+
+`images.json` = `{"out": "images", "style": "…", "images": [{id, prompt, aspect?, size?, text?, use?}]}`. The prompt sent is `Generate an image: <prompt>. <style>. aspect ratio <aspect>. no text, letters or watermark in the image.` (`"text": true` drops the last part).
+
 ## Environment variables
 
 | Variable | Meaning |
@@ -81,6 +94,7 @@ All four page tools take `--size WxH` (default `1920x1080`, even numbers) and `-
 | `ELEVENLABS_API_KEY` | the user's ElevenLabs key, for `tts_11labs.py`: in the shell, or in `.env` at the library root (copy `.env.example`; git ignores `.env`). The shell wins. Never in a project file. `ELEVENLABS_MODEL` and `ELEVENLABS_BASE_URL` can go in `.env` too |
 | `ELEVENLABS_MODEL` | `tts_11labs.py`'s default model for languages without their own default (Thai: `eleven_v4`) |
 | `ELEVENLABS_BASE_URL` | another ElevenLabs endpoint (a regional server, a proxy); default `https://api.elevenlabs.io` |
+| `CHATGPT_PROJECT_URL` | the user's ChatGPT Project for film images, for `chatgpt_images.py`: in the shell or in `.env`. Personal; never in a project file or a commit |
 
 ## Exit codes
 
@@ -94,3 +108,4 @@ All four page tools take `--size WxH` (default `1920x1080`, even numbers) and `-
 | `tts_11labs.py` | done | bad input, unknown voice, no key, a line rejected | network unreachable (3: key rejected or quota used up) |
 | `localize.py`, `locales/test.py` | done | bad input / a failing example | – |
 | `asr_check.py` | all lines pass | mismatches | model failed to load |
+| `chatgpt_images.py` | done | bad input, no new download, download not finished (Chrome's Save dialog) | usage |

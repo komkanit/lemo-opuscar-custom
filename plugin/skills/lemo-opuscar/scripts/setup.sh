@@ -107,5 +107,7 @@ command -v uv >/dev/null || find_py >/dev/null || miss="$miss python3.11+(or uv)
 if [ -n "$ELEVENLABS_API_KEY" ]; then echo "ElevenLabs API key: set in the shell (ElevenLabs voices can be offered)"
 elif [ -f "$LIB/.env" ] && grep -Eq '^[[:space:]]*(export[[:space:]]+)?ELEVENLABS_API_KEY=[[:space:]]*["'"'"']?[^[:space:]"'"'"'#]' "$LIB/.env"; then
   echo "ElevenLabs API key: set in $LIB/.env (ElevenLabs voices can be offered)"; fi
+if [ -n "$CHATGPT_PROJECT_URL" ] || { [ -f "$LIB/.env" ] && grep -Eq '^[[:space:]]*(export[[:space:]]+)?CHATGPT_PROJECT_URL=[[:space:]]*["'"'"']?https' "$LIB/.env"; }; then
+  echo "ChatGPT project: set (ChatGPT images through Chrome can be offered)"; fi
 node_ok && py_ok core || echo "! packages not installed yet: run 'sh setup.sh deps' (a few minutes) before the first render"
 echo "LIB=$LIB"

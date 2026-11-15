@@ -9,3 +9,7 @@ ELEVENLABS_API_KEY=
 
 # Optional: another endpoint, e.g. a regional server
 # ELEVENLABS_BASE_URL=https://api.elevenlabs.io
+
+# ChatGPT images (core/assets/chatgpt_images.py, driven in your own Chrome): the link of the
+# ChatGPT Project that keeps the film images apart from your other chats. Not a secret, but personal.
+# CHATGPT_PROJECT_URL=https://chatgpt.com/g/g-p-…/project

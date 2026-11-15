@@ -1,6 +1,6 @@
 # Technique: how the films are built
 
-Every film here is made from code: no video generation, no stock footage. This page explains the pipeline, to reproduce with our tools in `core/` or in your own stack. Pair it with [`DIRECTOR.md`](DIRECTOR.md) and one `styles/<slug>/STYLE.md`. Every command and flag is in [`core/README.md`](core/README.md).
+Every film here is made from code: no video generation, no stock footage (generated still images only as material, §11). This page explains the pipeline, to reproduce with our tools in `core/` or in your own stack. Pair it with [`DIRECTOR.md`](DIRECTOR.md) and one `styles/<slug>/STYLE.md`. Every command and flag is in [`core/README.md`](core/README.md).
 
 ```
 timeline (single source of truth)
@@ -145,6 +145,22 @@ Write an original score from the cue map, in the instruments of the style's soun
 ## 11. Assets, credits and fonts
 
 Only CC0, CC BY or OFL material, each listed in the film's `CREDITS` with its source and licence; `core/audio/sampler.py credits(names)` writes the lines for the instruments you used. Public-domain works count as CC0; "no known restrictions" does not. Data or images under other open licences (ODbL, CC BY-SA, open-hardware licences) only after you have named the licence and its terms (attribution, share-alike) to the user and they agree. The user's own material is fine as it is.
+
+### Generated images (ChatGPT, through the user's Chrome)
+
+When the user has a ChatGPT subscription and agrees, stills can be made in their own ChatGPT, driven through Claude in Chrome: no API key, but slow (about 40 s an image, one at a time), with the user nearby, and the prompts go to OpenAI under their account. Keep it to a handful of images a film: automated use of ChatGPT is a grey area under OpenAI's terms, and their plan limits images per day (a Free account makes only a few).
+
+- **What they are for.** Material the code draws on: backgrounds, textures, plates, props, concept or reference frames. Never a replacement for a style's own drawing code, and never a frame of the film as it is. Bring each image into the style (its palette, grain, line, crop) the way `STYLE.md` asks, and drop any that can't follow it. No real people, brands or existing characters (DIRECTOR.md §12).
+- **Keep their ChatGPT clean.** All film chats live in one ChatGPT Project (the user makes it, with project-only memory; its link is `CHATGPT_PROJECT_URL` in `.env`), one chat per film, so later images see the earlier ones and keep the look.
+- **The job list.** Write `images.json` in the project folder (core/README.md, Generated images): one entry per image, with the `size` the film needs. The user can read every prompt before anything is sent.
+- **One image:**
+  1. `chatgpt_images.py start images.json <id>` prints where to go and the prompt.
+  2. In Chrome, open that link in a new tab (first image: the project page, its "New chat in …" box; later ones: the film's chat), type the prompt as printed (its `Generate an image:` start is what makes ChatGPT draw rather than reply), press Return.
+  3. Wait: it is ready when `main img[alt^="Generated image"]` has one more image, with a `naturalWidth` above 0. Check the result in a screenshot; ask for a change in the same chat if it misses.
+  4. Download: click the image, then its **Download** button. Ask the user before the first download of a batch. If Chrome asks where to save, the user clicks Save (or turns off "Ask where to save each file" once).
+  5. `chatgpt_images.py ingest images.json <id> --chat <the chat's URL>` moves it in, crops it to `size` and logs it.
+- **Stop and hand over** on a sign-in page, a captcha or human check, or a limit message; never work around them.
+- **Credit** each film: `chatgpt_images.py credits images.json` writes the CREDITS line.
 
 A film that states facts (the Evidence Films styles) keeps a `FACTS.md` in the project folder: each claim with its source URL and the quoted wording, or the measurement that produced it.
 

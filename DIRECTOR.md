@@ -19,6 +19,8 @@ Say it in the questions when it matters: a good Chinese voice uses Microsoft's o
 
 When the film has a voice and the user has an ElevenLabs key (`ELEVENLABS_API_KEY` in the shell or in the library's `.env`, which `setup.sh deps` reports), offer ElevenLabs too: often the most natural voice, and for Thai the default choice (`eleven_v4`), but billed per character and the script goes to ElevenLabs, so only with their OK (TECHNIQUE.md §4).
 
+When the film would gain from a few painted or photographic stills (backgrounds, textures, plates) and the user has a ChatGPT project set up (`CHATGPT_PROJECT_URL`, which `setup.sh deps` reports) or mentions ChatGPT, offer ChatGPT images: made in their own ChatGPT through Chrome, slow and with them nearby, a handful per film, and only with their OK (TECHNIQUE.md §11).
+
 Requests that only change the plan:
 
 - **No voice, or no subtitles.** Drop those steps and say so in the treatment.
