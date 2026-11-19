@@ -1,0 +1,26 @@
+{
+  "out": "images",
+  "style": "Photorealistic cinematic film still, Thailand in the 1970s, shot on 35mm with a normal lens at night, lit only by practical sources (oil lamps, candles, moonlight), deep natural shadows, realistic skin and fabric, authentic Thai wooden architecture and props of the period, calm composition with room above the subject. Natural neutral colour, no colour grading, no film effects. Original people, not resembling any real person or actor",
+  "images": [
+    {
+      "id": "house-night",
+      "prompt": "Inside an old Thai teak house on stilts in a rural village at night. Bare dark wooden plank walls and floor, a woven reed mat on the floor. A small brass oil lamp with a glass chimney stands on the floor in the lower left, the only light, warm and low, throwing long shadows up the walls. On the right a white cotton mosquito net hangs from the ceiling over a sleeping mat, its far side lost in darkness. At the back an open wooden window shutter shows only black night and the faint shapes of banana leaves. Empty of people. Vertical composition, the floor in the lower third, generous dark space above",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "use": "style frame: background plate"
+    },
+    {
+      "id": "woman-green",
+      "prompt": "A young Thai village woman of the 1970s, about 25 years old, slim, black hair pulled back in a low bun, a plain light cotton blouse with short sleeves and a dark patterned sarong (pha sin). She sits on the floor with her legs folded to one side, one hand resting on the floor, her head turned to her left as if listening to a sound behind her, uneasy. Full body. Lit by a warm low oil lamp from the lower left of the frame, the right side of her face in shadow. Background: flat solid pure green (#00FF00), completely empty, no shadow on the background",
+      "aspect": "9:16",
+      "use": "style frame: figure layer, keyed"
+    },
+    {
+      "id": "house-ghost",
+      "prompt": "Edit the first image of this chat (the empty night room with the brass oil lamp and the white mosquito net). Keep everything exactly the same: every object, the walls, the window, the lamp, the light and the camera position. Only add one thing: a pale, thin woman with long loose black hair and a plain off-white sarong and blouse, standing perfectly still inside the mosquito net on the right, seen dimly through the fabric, her face hidden by her hair, her arms hanging at her sides. She is not lit by the lamp; her skin is grey and colourless. Vertical 9:16, same framing as before",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "use": "demo: same shot twice, used only inside the net mask"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "slug": "faded-thai-ghost",
+  "en": "Faded Thai Ghost Film",
+  "cn": "褪色泰国鬼片",
+  "th": "หนังผีไทยฟิล์มซีด",
+  "based_on": "manga-panels",
+  "borrows": ["silent-film"],
+  "size": "1080x1920",
+  "needs": ["image-generation"],
+  "library_version": "ae74f5f",
+  "created": "2026-11-17",
+  "line": "Photorealistic stills of an older Thailand on faded colour film, brought to life in code: the lamp breathes, fog drifts, and a shot you have seen comes back with one thing changed.",
+  "line_cn": "旧时泰国的写实静帧印在褪色的彩色胶片上，用代码让画面活起来：油灯呼吸、雾气漂移，看过的镜头再出现时，多了一样东西。"
+}

@@ -1,0 +1,474 @@
+{
+ "img_ext": "jpg",
+ "place": {
+  "th": "กีซา · 2560 ปีก่อน ค.ศ.",
+  "en": "Giza · 2560 BC"
+ },
+ "future_tag": {
+  "th": "ข้อมูลจากอนาคต",
+  "en": "from the future"
+ },
+ "hook": {
+  "th": "POV: คุณคือคนงาน|สร้างพีระมิด",
+  "en": "POV: you build|the pyramids"
+ },
+ "endcard": {
+  "th": "ย้อนไปดูชีวิตใครต่อดี?|คอมเมนต์มา",
+  "en": "Whose life should|I show you next?"
+ },
+ "shots": [
+  {
+   "id": "s01",
+   "img": "selfie_dawn",
+   "line": "L01",
+   "clock": "05:12",
+   "pre": 0.35,
+   "push": [
+    1.0,
+    1.06
+   ],
+   "focus": [
+    0.5,
+    0.36
+   ],
+   "bed": "dawn",
+   "caps": {
+    "th": [
+     "อรุณสวัสดิ์จากกีซาครับ!",
+     "ผมอีรี|คนสร้างพีระมิด…",
+     "ไม่ใช่ทาสนะ"
+    ],
+    "en": [
+     "Good morning from Giza!",
+     "I'm Iry, I build pyramids...",
+     "and no, I'm not a slave."
+    ]
+   },
+   "sub": {
+    "en": "Good morning from Giza! I'm Iry, I build pyramids... and no, I'm not a slave."
+   }
+  },
+  {
+   "id": "s02",
+   "img": "bakery",
+   "line": "L02",
+   "clock": "05:40",
+   "push": [
+    1.0,
+    1.05
+   ],
+   "focus": [
+    0.45,
+    0.5
+   ],
+   "bed": "fire",
+   "caps": {
+    "th": [
+     "ค่าแรงผมคือ|ขนมปังกับเบียร์",
+     "ยุคนี้ยังไม่มีเหรียญ"
+    ],
+    "en": [
+     "My pay is bread and beer.",
+     "Nobody uses coins yet."
+    ]
+   },
+   "sub": {
+    "en": "My pay is bread and beer. Nobody uses coins yet."
+   },
+   "stickers": [
+    {
+     "at": 0.15,
+     "th": "ค่าแรง!",
+     "en": "my pay!",
+     "pos": [
+      0.5,
+      0.36
+     ],
+     "to": [
+      0.36,
+      0.47
+     ],
+     "rot": -7
+    },
+    {
+     "at": 0.4,
+     "th": "+ เบียร์",
+     "en": "+ beer",
+     "pos": [
+      0.72,
+      0.47
+     ],
+     "to": [
+      0.78,
+      0.58
+     ],
+     "rot": 6
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "img": "crew_selfie",
+   "line": "L03",
+   "clock": "06:15",
+   "push": [
+    1.02,
+    1.07
+   ],
+   "focus": [
+    0.5,
+    0.4
+   ],
+   "bed": "site",
+   "caps": {
+    "th": [
+     "นี่ทีมผม ชื่อ|เพื่อนของคูฟู",
+     "จำชื่อนี้ไว้นะ"
+    ],
+    "en": [
+     "This is my crew,|the Friends of Khufu.",
+     "Remember that name."
+    ]
+   },
+   "sub": {
+    "en": "This is my crew, the Friends of Khufu. Remember that name."
+   },
+   "stickers": [
+    {
+     "at": 0.25,
+     "th": "ทีม: เพื่อนของคูฟู",
+     "en": "team: Friends of Khufu",
+     "pos": [
+      0.36,
+      0.215
+     ],
+     "to": [
+      0.47,
+      0.33
+     ],
+     "rot": -4
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "img": "pov_rope",
+   "line": "L04",
+   "clock": "09:30",
+   "push": [
+    1.0,
+    1.03
+   ],
+   "focus": [
+    0.5,
+    0.45
+   ],
+   "bed": "haul",
+   "caps": {
+    "th": [
+     "หินก้อนละสองตันครึ่ง",
+     "ราดน้ำให้ทรายเปียก",
+     "ลากเบาลงเกือบครึ่ง"
+    ],
+    "en": [
+     "Each block: two and a half tonnes.",
+     "Wet the sand,",
+     "and the pull is almost halved."
+    ]
+   },
+   "sub": {
+    "en": "Each block weighs two and a half tonnes. Wet the sand, and the pull gets almost half as hard."
+   },
+   "punch": {
+    "at": 0.05,
+    "to": 1.28,
+    "focus": [
+     0.375,
+     0.22
+    ]
+   },
+   "box": {
+    "at": 0.1,
+    "rect": [
+     0.215,
+     0.13,
+     0.535,
+     0.315
+    ],
+    "th": "≈ 2.5 ตัน",
+    "en": "≈ 2.5 tonnes"
+   },
+   "stickers": [
+    {
+     "at": 0.3,
+     "th": "รวม 2.3 ล้านก้อน!",
+     "en": "× 2.3 million!",
+     "pos": [
+      0.42,
+      0.345
+     ],
+     "to": null,
+     "rot": 4
+    },
+    {
+     "at": 0.55,
+     "th": "แรงลาก ≈ ½",
+     "en": "pull ≈ ½",
+     "pos": [
+      0.3,
+      0.43
+     ],
+     "to": [
+      0.16,
+      0.345
+     ],
+     "rot": -5
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "img": "harbor_white",
+   "line": "L05",
+   "clock": "11:00",
+   "push": [
+    1.0,
+    1.05
+   ],
+   "focus": [
+    0.5,
+    0.4
+   ],
+   "bed": "site",
+   "caps": {
+    "th": [
+     "เสร็จแล้วมันจะ|ขาววาวทั้งลูก",
+     "และสูงที่สุดในโลก|ไปอีก 3,800 ปี"
+    ],
+    "en": [
+     "When it's done,|it'll be shining white,",
+     "the tallest thing on Earth|for 3,800 years."
+    ]
+   },
+   "sub": {
+    "en": "When it's done, it'll be shining white, and the tallest thing on Earth for the next 3,800 years."
+   },
+   "future": {
+    "at": 0.45
+   }
+  },
+  {
+   "id": "s06",
+   "img": "accident",
+   "line": "L06",
+   "clock": "13:10",
+   "pre": 0.12,
+   "post": 0.45,
+   "push": [
+    1.04,
+    1.1
+   ],
+   "focus": [
+    0.5,
+    0.45
+   ],
+   "bed": "haul",
+   "shake": 3.2,
+   "alarm": true,
+   "caps": {
+    "th": [
+     "แล้วก็…",
+     "เน็บโดนหินทับขา!"
+    ],
+    "en": [
+     "And then...",
+     "Neb's leg got pinned|under a block!"
+    ]
+   },
+   "sub": {
+    "en": "And then... Neb's leg got pinned under a block!"
+   }
+  },
+  {
+   "id": "s07",
+   "img": "doctor",
+   "line": "L07",
+   "clock": "13:30",
+   "push": [
+    1.0,
+    1.05
+   ],
+   "focus": [
+    0.45,
+    0.48
+   ],
+   "bed": "shade",
+   "caps": {
+    "th": [
+     "แต่ที่นี่มีหมอนะ",
+     "จัดกระดูกได้|ผ่าตัดสมองก็ยังมี"
+    ],
+    "en": [
+     "But we have doctors.",
+     "They set bones.|They even do brain surgery."
+    ]
+   },
+   "sub": {
+    "en": "But we have doctors. They set bones. They even do brain surgery."
+   },
+   "stickers": [
+    {
+     "at": 0.3,
+     "th": "เฝือกไม้",
+     "en": "wooden splint",
+     "pos": [
+      0.68,
+      0.42
+     ],
+     "to": [
+      0.42,
+      0.62
+     ],
+     "rot": -6
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "img": "graffiti",
+   "line": "L08",
+   "clock": "17:40",
+   "push": [
+    1.0,
+    1.06
+   ],
+   "focus": [
+    0.5,
+    0.45
+   ],
+   "bed": "dusk",
+   "post": 0.75,
+   "caps": {
+    "th": [
+     "ตกเย็น|เราแอบเขียนชื่อทีม",
+     "ไว้บนหินที่จะ|อยู่ข้างในสุด"
+    ],
+    "en": [
+     "At dusk we secretly paint|our crew's name",
+     "on a block that will sit|deep inside."
+    ]
+   },
+   "sub": {
+    "en": "At dusk we secretly paint our crew's name on a block that will sit deep inside."
+   },
+   "future": {
+    "at": 0.55,
+    "year": {
+     "th": "ค.ศ. 1837 · พบชื่อนี้ในพีระมิด",
+     "en": "1837 AD · found inside the pyramid"
+    }
+   }
+  },
+  {
+   "id": "s09",
+   "img": "merer_log",
+   "line": "L09",
+   "clock": "20:30",
+   "push": [
+    1.0,
+    1.04
+   ],
+   "focus": [
+    0.5,
+    0.45
+   ],
+   "bed": "night",
+   "lamp": true,
+   "caps": {
+    "th": [
+     "ส่วนพี่เมเรอร์|หัวหน้าเรือขนหิน",
+     "จดบันทึกงานทุกวัน"
+    ],
+    "en": [
+     "And Merer,|captain of a stone boat,",
+     "writes a log of our work|every day."
+    ]
+   },
+   "sub": {
+    "en": "And Merer, the captain of a stone boat, writes a log of our work every day."
+   }
+  },
+  {
+   "id": "s10",
+   "img": "merer_log",
+   "line": "L10",
+   "clock": "",
+   "pre": 0.3,
+   "push": [
+    1.12,
+    1.3
+   ],
+   "focus": [
+    0.38,
+    0.68
+   ],
+   "bed": "archive",
+   "archive": true,
+   "post": 0.6,
+   "caps": {
+    "th": [
+     "4,500 ปีต่อมา",
+     "บันทึกนั้นกลายเป็น|กระดาษปาปิรัส",
+     "ที่มีตัวหนังสือ|เก่าที่สุดในโลก"
+    ],
+    "en": [
+     "4,500 years later,",
+     "that log is the oldest|papyrus with writing",
+     "ever found."
+    ]
+   },
+   "sub": {
+    "en": "4,500 years later, that log is the oldest papyrus with writing ever found."
+   },
+   "future": {
+    "at": 0.0,
+    "year": {
+     "th": "ค.ศ. 2013 · ขุดพบริมทะเลแดง",
+     "en": "2013 AD · dug up by the Red Sea"
+    }
+   }
+  },
+  {
+   "id": "s11",
+   "img": "bed",
+   "line": "L11",
+   "clock": "21:15",
+   "post": 4.1,
+   "push": [
+    1.0,
+    1.08
+   ],
+   "focus": [
+    0.5,
+    0.5
+   ],
+   "bed": "night",
+   "lamp": true,
+   "loop": true,
+   "end": true,
+   "caps": {
+    "th": [
+     "ครั้งหน้าที่เห็นพีระมิด…",
+     "จำไว้นะ ข้างในนั้น|มีชื่อพวกเราอยู่"
+    ],
+    "en": [
+     "Next time you see a pyramid...",
+     "remember:|our names are inside."
+    ]
+   },
+   "sub": {
+    "en": "Next time you see a pyramid... remember: our names are inside."
+   }
+  }
+ ]
+}

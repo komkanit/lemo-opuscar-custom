@@ -1,0 +1,9 @@
+POV: Pyramid Worker · POV คนงานสร้างพีระมิด — demo film of the POV History Vlog style
+
+Images (page/images): generated with ChatGPT image generation (OpenAI) for this film, from the prompts in images.json (one chat, a reference image for the recurring faces); dinner/edit history in the film folder's images.log.json.
+Voice (voice/out-th): ElevenLabs text-to-speech, voice "Bankky – Casual" (Thai), from voice/lines.th.json.
+Music: original score in tools/mix.py on sampled instruments: harp, shaker, hand chimes (Versilian Community Sample Library, CC0), world percussion (FreePats, CC0), jazz bass "Sneakybass" (Karoryfer Samples, CC0).
+Sound effects: synthesised in code with the library's core/audio/sfx.py.
+Fonts (page/fonts): Kanit SemiBold and Black, Mali Bold, by Cadson Demak, SIL Open Font License 1.1.
+Code: page/film.js, tools/timeline.py, tools/mix.py written for this style; they call Lemo-Opuscar's core tools (MIT).
+Facts and sources: FACTS.md. Iry and Neb are invented characters.

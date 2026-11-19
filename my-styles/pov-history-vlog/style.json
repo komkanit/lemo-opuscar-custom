@@ -1,0 +1,14 @@
+{
+  "slug": "pov-history-vlog",
+  "en": "POV History Vlog",
+  "cn": "古人第一视角Vlog",
+  "th": "POV vlog ย้อนยุค",
+  "based_on": "manga-panels",
+  "borrows": [],
+  "size": "1080x1920",
+  "needs": ["image-generation"],
+  "library_version": "ae74f5f",
+  "created": "2026-11-19",
+  "line": "Someone from the past vlogs their own day in photoreal stills brought to life as a phone in code; one message, sourced surprising facts, and the date jumps forward when a fact comes from the future.",
+  "line_cn": "古人用手机视角拍下自己的一天：写实静帧由代码变成手持镜头；一条主线、有出处的惊人知识，说到后世才知道的事时，日期跳到未来。"
+}

@@ -1,0 +1,29 @@
+Faded Thai Ghost Film (หนังผีไทยฟิล์มซีด) — "มุ้งขาว · The White Net" (demo film of the user's own style)
+Every asset in the film, with its source and licence.
+
+STORY AND PEOPLE
+- An invented scene. The woman and the figure in the net are original, generated for this demo; they resemble
+  no real person. No real legend, place or event is depicted.
+
+IMAGES (ChatGPT image generation, OpenAI)
+- These images belong to this demo only; a film in this style generates its own images for its own story.
+- img/house.png (house-night), img/woman.png (woman-green, keyed by tools/key.py), img/house-ghost.png
+  (house-ghost, an edit of house-night in the same chat, used only inside img/ghost-mask.png).
+  Generated with ChatGPT image generation (OpenAI) for this film; prompts in images.json and images.log.json.
+
+FONTS (SIL Open Font License 1.1, Google Fonts)
+- Kanit (Cadson Demak), Prompt (Cadson Demak), Trirong (Cadson Demak).
+
+VOICES (narrated versions)
+- ElevenLabs (eleven_v4): "Tonce - Friendly" (voice/tonce) and "HammyTH - Warm& friendly" (voice/hammy),
+  generated through core/tts/tts_11labs.py on the user's ElevenLabs plan.
+
+MUSIC AND SOUND
+- Samples (CC0): Karoryfer Samples / sfzinstruments, Versilian Community Sample Library (Versilian Studios):
+  erhu, marimba, gong (through core/audio/sampler.py).
+- Night bed (crickets, frogs, gecko, dog), drone, lamp sputter: synthesised in mix.py; creak from core/audio/sfx.py.
+
+CODE
+- src/engine.js, src/text.js, src/film.js, tools/key.py, mix.py: written for this style. The film print pass
+  follows the ideas of styles/silent-film/demo/engine/film.js and the green key those of
+  styles/manga-panels/demo/tools/prep.py in Lemo-Opuscar (MIT, Copyright (c) 2026 Lemomo (LemoLab)).

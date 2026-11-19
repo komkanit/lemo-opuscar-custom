@@ -1,0 +1,95 @@
+{
+  "out": "images",
+  "style": "Same young man Iry as in the first selfie of this chat (about 25, sun-tanned, short cropped black hair, thin face, thick eyebrows, wide grin, a thin cord necklace with a small carved falcon amulet, white linen kilt) whenever he appears. Photorealistic, looks exactly like a frame from a modern smartphone vlog: wide-angle phone lens, natural light, slight lens distortion at the edges, crisp detail, realistic skin with sweat and dust, authentic ancient Egyptian Old Kingdom clothing, tools and architecture at Giza around 2560 BC, nothing modern anywhere in the scene, no phone or camera visible. Original people, not resembling any real person or actor. Tall vertical image",
+  "images": [
+    {
+      "id": "ref_neb",
+      "aspect": "2:3",
+      "use": "reference only",
+      "prompt": "Character reference of Neb, Iry's best friend on the crew: a stocky Egyptian worker of about 30, shaved head, round friendly face, broad shoulders, a bracelet of small blue faience beads on his right wrist, a white linen kilt, dusty skin. Half body, facing the camera, laughing. Plain warm-grey background, soft even light"
+    },
+    {
+      "id": "bakery",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "First-person point of view at dawn inside the workers' bakery: Iry's own hand reaches into the frame from the bottom and takes a freshly baked conical loaf out of a broken bell-shaped clay bread mould; in his other hand a rough clay beer jar with a reed straw. Around him low mudbrick walls, rows of clay bread moulds heating in glowing embers, a woman and a man kneading dough, warm smoke, pink dawn light through the doorway. Room for captions in the lower third"
+    },
+    {
+      "id": "crew_selfie",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "Arm's-length group selfie in the morning: Iry in front, grinning, his outstretched arm toward the lower corner of the frame; squeezed in behind him four other workers in white linen kilts pulling funny faces and raising fists, including Neb from the reference image (stocky, shaved head, round face, blue bead bracelet) with his arm around Iry's shoulders. Behind them a huge pale limestone block on a wooden sledge with thick ropes coiled on it, and the stepped side of the half-built pyramid. Clear morning light. Room for captions in the lower third"
+    },
+    {
+      "id": "water_pour",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "Low handheld shot, close to the ground, in front of the wooden runners of a heavy sledge carrying a huge limestone block: a worker in a linen kilt tips a big clay jar and a stream of water splashes onto the sand right in front of the runners, the wet sand dark and packed, dry pale sand around it; behind, the taut ropes and the legs of many men leaning into the pull. Harsh midday sun, flying droplets, dust. Room for captions in the lower third"
+    },
+    {
+      "id": "lunch_view",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "Arm's-length selfie at noon high up on the long mudbrick construction ramp on the side of the half-built Great Pyramid: Iry sits on a stone, sweaty, chewing a piece of bread and an onion, smiling with his mouth full, giving a thumbs up. Behind and far below him: the workers' town of mudbrick houses and bakeries, the green fields and the shining Nile in the distance, tiny people hauling blocks up the ramp. Bright midday light, vast space. Room for captions in the lower third"
+    },
+    {
+      "id": "accident",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "First-person point of view, tilted and blurred by sudden movement, Iry's own hands reaching forward into the frame: a limestone block has slipped off its sledge in a cloud of dust and pinned the lower leg of Neb from the reference image, who lies on the sand shouting in pain, gripping his knee; other workers rush in with wooden levers and ropes. No blood, no wounds visible, the danger told by the dust, the stone and the faces. Harsh afternoon light. Room for captions in the lower third"
+    },
+    {
+      "id": "doctor",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "First-person point of view, Iry kneeling beside Neb from the reference image in the shade of a reed shelter: an older Egyptian doctor with a shaved head and a linen kilt binds Neb's lower leg between two smooth wooden splints with long strips of white linen; Neb grits his teeth and squeezes Iry's hand, which reaches in from the bottom of the frame. Clay pots of ointment, a basket of linen rolls. Soft afternoon light. No blood. Room for captions in the lower third"
+    },
+    {
+      "id": "dinner",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "Arm's-length selfie at sunset in the workers' town: Iry grins and holds up a piece of grilled beef on a bone, his crew sitting on mats behind him sharing a meal of grilled meat, round bread and clay jars of beer around a low fire, mudbrick houses, the pyramid silhouetted against a deep orange sky. Warm golden light. Room for captions in the lower third"
+    },
+    {
+      "id": "dinner2",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "text": false,
+      "use": "shot 9 (edit of dinner: Neb swapped for another worker)",
+      "prompt": "Edit the sunset dinner selfie image (Iry holding up grilled beef on a bone). Keep everything exactly the same: Iry, his pose, the beef, the fire, the food, the sunset, the pyramid, the houses and the camera position. Change only one thing: the bald stocky man with the blue bead bracelet sitting on the left behind Iry becomes a different worker, a thin young man with curly black hair and no bracelet, laughing and drinking from a clay cup in the same place"
+    },
+    {
+      "id": "night_neb",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "Arm's-length selfie at night by the light of a small clay oil lamp: Iry and Neb from the reference image side by side on a mat against a mudbrick wall, both laughing; Neb's lower leg is stretched out bound between wooden splints with white linen, he raises a clay beer jar toward the camera. Deep shadows, warm lamp light on their faces, a few stars through the doorway. Room for captions in the lower third"
+    },
+    {
+      "id": "bed",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "prompt": "Selfie from above, Iry lying on his back on a reed sleeping mat in a long dark mudbrick dormitory at night, exhausted half smile, eyes heavy, one arm under his head; other workers asleep on mats in a row behind him; a single small oil lamp on the floor glowing low, deep blue darkness. Room for captions in the lower third"
+    },
+    {
+      "id": "harbor_white",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "use": "shot 5: the white casing",
+      "prompt": "Late morning at the busy harbour basin at the foot of the Giza plateau: wooden cargo boats with big square linen sails moored at a stone quay, workers unloading gleaming white polished limestone blocks onto wooden sledges. Behind them the Great Pyramid: its lower part already clad in perfectly smooth, polished white limestone casing that shines brightly in the sun, its upper part still stepped and under construction with ramps and tiny workers. Iry stands in the foreground on the left, arm's-length selfie, pointing back over his shoulder at the shining white stone with an amazed open-mouthed grin. Bright sun, blue sky. Room for captions in the lower third"
+    },
+    {
+      "id": "graffiti",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "use": "shot 8: painting the crew's name",
+      "prompt": "First-person point of view at dusk: Iry's own right hand holds a reed brush dipped in red ochre and paints bold rough red marks and a small rounded oval outline on the flat face of a huge pale limestone block; his left hand holds a small clay pot of red paint. The marks are crude painted symbols, not readable letters. Two grinning crew mates in linen kilts lean on the block watching; the stepped side of the half-built pyramid behind them in warm low orange sunset light, long shadows. Room for captions in the lower third"
+    },
+    {
+      "id": "merer_log",
+      "aspect": "9:16",
+      "size": "1242x2208",
+      "use": "shots 9 and 10: Merer writing his log",
+      "prompt": "Evening on the deck of a wooden Nile cargo boat moored at the harbour: an Egyptian official of about 40 named Merer, slim, short black wig, white linen kilt, sits cross-legged writing in black ink with a reed pen on a long sheet of papyrus spread across his knees, a scribe's palette beside him and a small clay oil lamp; the papyrus is covered in neat columns of small black hieroglyph-like marks (not readable text). The boat is loaded with white limestone blocks, the pyramid silhouette against a deep blue dusk sky. Iry leans into the frame from the right edge in an arm's-length selfie, eyebrows raised, a finger to his lips as if whispering. Warm lamp light. Room for captions in the lower third"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Kanit'; font-weight: 600; src: url(fonts/Kanit-SemiBold.ttf); }
+@font-face { font-family: 'Kanit'; font-weight: 900; src: url(fonts/Kanit-Black.ttf); }
+@font-face { font-family: 'Prompt'; font-weight: 600; src: url(fonts/Prompt-SemiBold.ttf); }
+@font-face { font-family: 'Trirong'; font-weight: 700; src: url(fonts/Trirong-Bold.ttf); }
+html, body { margin: 0; background: #140C08; overflow: hidden; }
+canvas { display: block; position: absolute; left: 0; top: 0; }
+</style></head>
+<body><canvas id="gl"></canvas><canvas id="cap"></canvas>
+<script type="module">
+await Promise.all(['600 40px Kanit', '900 40px Kanit', '600 40px Prompt', '700 40px Trirong'].map(f => document.fonts.load(f, 'กขคมุ้ง abc 123')));
+const q = new URLSearchParams(location.search);
+await import(q.get('frame') ? './src/frames.js' : './src/film.js');
+window.READY = true;
+</script></body></html>
