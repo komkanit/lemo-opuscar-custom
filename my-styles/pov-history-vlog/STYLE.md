@@ -87,11 +87,16 @@ Not a slideshow of pretty AI pictures with timestamps (no spine, no person), not
 3. **Punch, box, number**: the voice names a weight or a count, the camera punches in, a yellow box and a number sticker land on it.
 4. **The shock cut**: the day breaks once (an accident, a raid, a storm), in red, and the music stops.
 5. **Archive reveal**: the scene we saw becomes an old photograph as the voice says what it became.
-6. **The map from the future** (whenever the place still exists, so the viewer can find it today): a full-screen antique map drawn in code (parchment with fibre, stains and burnt edges, a double ink frame, faded-teal rivers with ink banks, little ink trees, a compass rose, Trirong lettering with a paper halo, red ink for "ours"). It opens on the vlogger's day, the date jump rewrites the pin to today's year ("พ.ศ. 2569 · กรุงเทพฯ วันนี้") and the map morphs to today, then today's landmarks pop in as little ink drawings exactly as the voice names them; a legend and "แผนที่โดยประมาณ" at the bottom. Schematic, never to scale, but every landmark on the right bank and in the right order (sources in `FACTS.md`). It comes near the end, after the strongest fact and before the closing line. The user asked for it: "it doesn't show how this connects to today".
+6. **The map from the future** (only when *where* is the point of the film): a full-screen antique map drawn in code (parchment with fibre, stains and burnt edges, a double ink frame, faded-teal rivers with ink banks, little ink trees, a compass rose, Trirong lettering with a paper halo, red ink for "ours"). It opens on the vlogger's day, the date jump rewrites the pin to today's year ("พ.ศ. 2569 · กรุงเทพฯ วันนี้") and the map morphs to today, then today's landmarks pop in as little ink drawings exactly as the voice names them; a legend and "แผนที่โดยประมาณ" at the bottom. Schematic, never to scale, but every landmark on the right bank and in the right order (sources in `FACTS.md`). It comes near the end, after the strongest fact and before the closing line. The user asked for it: "it doesn't show how this connects to today".
+
+7. **How it works** (only when the film's surprise is a mechanism): a full-screen antique diagram on the same parchment, e.g. two magnifying glasses side by side, before and after, drawn in as the voice explains, ending on the result in red ink, "แผนภาพโดยประมาณ" at the bottom. First made for the Great Wall's sticky-rice mortar (big crystals with gaps vs small packed crystals held by starch).
+
+**Map or diagram, or neither** (the user's rule): add one only when it explains something the pictures can't. The map is for when *where* is the point (the canal is today's river in front of Wat Arun); the diagram is for when *how* is the point. A how-to film already shows the how, so it needs neither.
 
 ## 9. Pitfalls of the medium
 
 - **A day without a point.** A clock and nice pictures are not a film. Write the one sentence first; cut beats that don't serve it; end on the message, not a generic question.
+- **Knowledge the vlogger can't have.** They speak only what someone of their time could know: what they see, feel, were told. Degrees, chemistry ("iron in the clay"), modern units, what science found later: never in their mouth; it goes in a yellow sticker under the "from the future" tag. (Caught by the user in the Ko Kret film: "how would she know 700–900 degrees in พ.ศ. 2400?")
 - **Unsourced facts.** Every number and claim has a source in `FACTS.md`; say "about", "almost", "evidence of" where the sources do.
 - **Faces drift.** Keep one chat, reference images, and the identifying details in every prompt; check each image and fix with the image's own Edit.
 - **Continuity.** An injured friend can't appear whole at dinner; the light must match the clock.
@@ -109,6 +114,30 @@ Not a slideshow of pretty AI pictures with timestamps (no spine, no person), not
 - `demo/build.sh`: timeline → mix → `core/render/video.mjs` → `mux.sh` → `srt.py`.
 - Technique base: `$LIB/styles/manga-panels/` (stills from an image generator brought to life in code).
 
-## 11. Variation space
+## 11. Formats and variety (rule)
+
+The look, the UI, the date jump, the quiet captions and the end-card question are the channel's signature and stay. Everything else turns over, so that a viewer who watches three in a row can't predict the next beat. Before writing any film, read `FORMATS.md` (what the earlier films used) and add a row for the new one.
+
+- **Never the same format or opening type as the film before it.**
+- **The ending is the signature**: "ครั้งหน้าที่ [เห็น/กิน/ผ่าน สิ่งที่คนดูเจอในชีวิตจริง]… จำไว้นะ [สิ่งที่ซ่อนอยู่ในนั้น]". The user tried other endings (a number, a callback joke) and asked for this one back. Keep it fresh by what it points at (an object the viewer meets in their own life) and, when possible, by making it answer the film's opening.
+- **Pick 2–3 native moves**, the date jump always among them. The shock cut, the archive reveal and the map are optional, not a checklist.
+- **Change the vlogger**: women, children, traders, cooks, monks, craftspeople, not only working men.
+
+Formats (the user likes B, C and D most):
+
+| | Format | How it runs | What changes in the UI |
+|---|---|---|---|
+| A | **หนึ่งวัน** (one day) | the clock runs dawn to night; each shot is a new hour | the clock |
+| B | **สอนทำ…** (how-to) | the vlogger teaches how to make one thing, step by step, in their era's way; every step hides a surprising fact; the last step shows what the thing (or the craft) became | the clock becomes a step counter "STEP 1/5"; each step's name as a sticker |
+| C | **พาเที่ยว…** (tour) | the vlogger walks the viewer through a place, stop by stop (a market, a palace kitchen, a port); the most surprising stop last | the pin text changes at every stop; the map from the future can open or close the tour |
+| D | **ปีเดียวกัน สองชีวิต** (same year, two lives) | two vloggers in the same place and year (rich and poor, two sides of a wall, master and apprentice) cut against each other; the films cross where their lives touch | two name tags in two colours at the top; the clock shared |
+| E | นับถอยหลัง (countdown) | one event in real time | a countdown instead of the clock |
+| F | ตอบคอมเมนต์จากอนาคต (Q&A) | the vlogger answers viewers' questions from the future, one per shot | each question as a comment card |
+| G | หลายปีในคลิปเดียว (a life) | one person across many years | the year instead of the clock |
+
+Opening types: a greeting from the place · a tease of a secret · a bold claim · in the middle of the action · a question to the viewer.
+Ending: the reminder above (other types, such as a number, a joke, a twist or a cliffhanger, only if the user asks).
+
+## 12. Variation space
 
 Free in every film: the person, era and place (any culture; Thai topics through commoners), the one-sentence message, the facts, the number and order of shots (about 10–12 for 55–60 s), the clock, which native moves appear besides the date jump, the shock (or none), the voice, the instruments of the place, the end-card question, the language (one language per channel; another language as an `.srt`, or a separate build with its own voice).
