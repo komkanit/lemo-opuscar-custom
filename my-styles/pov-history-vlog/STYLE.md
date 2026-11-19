@@ -47,13 +47,14 @@ Not a slideshow of pretty AI pictures with timestamps (no spine, no person), not
 
 ## 4. Type & subtitles
 
-- **Captions**: Kanit Black, 78 px at 1080 wide for Thai (72 for Latin), white, a dark outline of 20 % of the size, centred, the block centred at 66.5 % of the frame height; 1–2 lines per phrase (`|` breaks lines), shrunk to fit 940 px. They pop in (scale 0.8 → 1 with a slight overshoot, 0.16 s) and change on the voice's phrases; the last phrase of a line holds to the cut. They are the voice's own subtitles: timed by the voice and exported as `.srt`, not by reading speed.
+- **Captions** (rule, the user's choice "B" after the first two films): quiet and low, so they sit in the picture instead of on it. Kanit SemiBold, 50 px at 1080 wide for Thai (46 for Latin), white, no outline, only a soft dark shadow (blur 14 px plus a tight 4 px one), centred, the block centred at 77.5 % of the frame height (below the faces and the subject, above the platform's bottom bar); 1–2 lines per phrase (`|` breaks lines), shrunk to fit 920 px. They fade up in 0.14 s with an 8 px rise (no pop) and change on the voice's phrases; the last phrase of a line holds to the cut. They are the voice's own subtitles: timed by the voice and exported as `.srt`, not by reading speed. The first look (Kanit Black 78 px, thick outline, pop) is kept as `cap=A` in `film.js` but was rejected as "too loud".
 - **Hook card** (first 3.4 s): Kanit Black on a white rounded card, tilted −1.5°, at 47 % height (on the chest, between face and captions): "POV: คุณคือ…" / "POV: you …". Never a "1 day in the life of…" card.
 - **Vlog UI** (top, inside a dark band): blinking REC dot + "DAY 1" (Kanit Black 46 px) at the left, the clock at the right, a location pin with "place · date" (Kanit SemiBold 34 px) under it.
 - **Stickers**: Mali Bold 62 px, yellow with a dark outline, tilted a few degrees, popping in; an optional hand-drawn curved arrow that draws itself in 0.25 s to the thing named. Stickers and boxes are pinned to the picture (they move with the camera).
 - **From the future**: a yellow rounded tag with ▶▶ and "ข้อมูลจากอนาคต" / "from the future" under the pin; with a year, the pin text itself turns yellow and becomes the year and the find ("ค.ศ. 1837 · พบชื่อนี้ในพีระมิด").
+- **The map's lettering**: Trirong Bold (OFL), dark-brown ink `#3b2614`, "ours" in red ink `#a5281b`, with a pale paper halo; the vlog UI stays on top in its usual white and yellow.
 - **End card**: yellow card with a dark border, Kanit Black, at 62 % height, replacing the captions for the last ~3.5 s: the question that leads to the next film.
-- Thai by default (the film's language); Latin uses the same fonts. Fonts: Kanit and Mali, both OFL.
+- Thai by default (the film's language); Latin uses the same fonts. Fonts: Kanit, Mali and Trirong (the map), all OFL.
 
 ## 5. Motion quality
 
@@ -86,6 +87,7 @@ Not a slideshow of pretty AI pictures with timestamps (no spine, no person), not
 3. **Punch, box, number**: the voice names a weight or a count, the camera punches in, a yellow box and a number sticker land on it.
 4. **The shock cut**: the day breaks once (an accident, a raid, a storm), in red, and the music stops.
 5. **Archive reveal**: the scene we saw becomes an old photograph as the voice says what it became.
+6. **The map from the future** (whenever the place still exists, so the viewer can find it today): a full-screen antique map drawn in code (parchment with fibre, stains and burnt edges, a double ink frame, faded-teal rivers with ink banks, little ink trees, a compass rose, Trirong lettering with a paper halo, red ink for "ours"). It opens on the vlogger's day, the date jump rewrites the pin to today's year ("พ.ศ. 2569 · กรุงเทพฯ วันนี้") and the map morphs to today, then today's landmarks pop in as little ink drawings exactly as the voice names them; a legend and "แผนที่โดยประมาณ" at the bottom. Schematic, never to scale, but every landmark on the right bank and in the right order (sources in `FACTS.md`). It comes near the end, after the strongest fact and before the closing line. The user asked for it: "it doesn't show how this connects to today".
 
 ## 9. Pitfalls of the medium
 
@@ -100,7 +102,7 @@ Not a slideshow of pretty AI pictures with timestamps (no spine, no person), not
 
 ## 10. Engine
 
-- `demo/page/film.js` (2D canvas): the camera (push, clamped focus, shake, punch-in), cut flashes, lamp breath, archive look, glitch; UI, hook card, captions, stickers and arrows, box, future tag, end card; `window.TEXTS` for readcheck (captions marked `pass`).
+- `demo/page/film.js` (2D canvas): the camera (push, clamped focus, shake, punch-in), cut flashes, lamp breath, archive look, glitch; UI, hook card, captions (`?cap=A|B|C|D`, default B), stickers and arrows, box, future tag, end card; the antique map (`drawMap`: a shot with `"img": null` and a `"map"` block: `cut` = the fraction of the line where the drawing starts, `pins` = `[{id, at, th, en}]` timed as fractions of the line, `labels` per language; the geometry is the `MAP` constant, rewritten for each place); `window.TEXTS` for readcheck (captions marked `pass`). The demo film has no map; the first map was made for "POV: คนขุดคลองลัดบางกอก" (Bangkok's 1542 shortcut canal, now the Chao Phraya in front of Wat Arun).
 - `demo/page/shots.json`: the film as data: per shot the image, the voice line, the clock, push and focus, room tone, captions per language, stickers, box, punch, future; plus the place, the hook, the tag and the end card.
 - `demo/tools/timeline.py`: shots + the voice's durations → `timeline.<lang>.json` (times of everything, events for the mix) and subtitle cues (`--sub en` for a second language on the same timing).
 - `demo/tools/mix.py`: score (sampler), room tone and effects (sfx) from the events, voice-first ducking, per-line voice margin.

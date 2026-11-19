@@ -15,4 +15,6 @@ Made from a blank page. "Base" is the technique base, Manga Panels (`manga-panel
 | §6 Camera | panels as shots | the vlogger's own camera; punch-in instead of close-up cuts; new shot = new hour or place | POV is the point |
 | §7 Sound | — (manga demo score) | first-person ElevenLabs voice leading by ≥ 6 dB; hand percussion and harp of the place; silence on the shock; chime swell on future facts; room tone per shot | voice-first like the user's other series |
 | §8 Native moves | panel break, speed-line hit | the date jump (signature); plant and pay off; punch-box-number; shock cut; archive reveal | the user asked for the clock to mean more; the date jump carries the message across time |
+| §4 Captions (revised) | — | Kanit SemiBold 50 px, soft shadow only, at 77.5 %, fade up | after two films the user found the Black + thick outline captions "too prominent"; picked option B from four on real frames, then asked for it smaller and off the picture |
+| §8 The map (added) | — | an antique map drawn in code: the day it was dug → today, landmarks pop in with the voice | the canal film didn't show where the place is today; the user asked for an explanatory picture, then for it "in an old theme" |
 | Language | — | one language per channel; Thai voice and captions, English as `.srt` | the user's decision: Thai channel first, never mix languages on one channel |

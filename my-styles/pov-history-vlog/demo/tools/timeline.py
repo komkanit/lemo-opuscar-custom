@@ -25,6 +25,7 @@ for i, s in enumerate(S['shots']):
     if 'future' in s:
         y = s['future'].get('year'); sh['future'] = dict(t=at(s['future']['at']), tag=S['future_tag'][lang], year=y[lang] if y else None)
         ev.append(dict(t=sh['future']['t'], type='future', year=bool(y)))
+    for k in s.get('map', {}).get('pins', []): ev.append(dict(t=at(k['at']), type='pop', v=0.7))   # the map's pins pop in
     sh['stickers'] = [dict(text=k[lang], pos=k['pos'], to=k['to'], rot=k['rot'], t=at(k['at'])) for k in s.get('stickers', [])]
     for k in sh['stickers']: ev.append(dict(t=k['t'], type='pop', v=1.0))
     if i > 0: ev.append(dict(t=round(t0, 3), type='cut', alarm=bool(s.get('alarm')), glitch=bool(s.get('archive'))))
@@ -45,7 +46,7 @@ for i, s in enumerate(S['shots']):
         if sub: subcues.append(dict(t0=sh['endcard']['t'], t1=round(t1 - 0.3, 3), text=S['endcard'][sub].replace('|', ' ') + ' Comment below.'))
     shots.append(sh); t = t1
 
-out = dict(lang=lang, DUR=round(t, 3), img_ext=S.get('img_ext', 'png'), place=S['place'][lang], hook=dict(t0=0.1, t1=3.45, lines=S['hook'][lang].split('|')),
+out = dict(lang=lang, DUR=round(t, 3), img_ext=S.get('img_ext', 'png'), place=S['place'][lang], hook=dict(t0=0.1, t1=3.6, lines=S['hook'][lang].split('|')),
            shots=shots, caps=caps, EV=sorted(ev, key=lambda e: e['t']))
 json.dump(out, open(os.path.join(PAGE, f'timeline.{lang}.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 os.makedirs(OUTD, exist_ok=True)
