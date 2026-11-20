@@ -359,6 +359,13 @@ function box(t, s) {
   TEXTS.push({ id: 'box', text: b.text, x0: x0, y0: y0 - 90 * S, x1: x1, y1: y0 });
 }
 
+// the channel's watermark: small, white, see-through, top right under the clock (clear of the Shorts buttons)
+function watermark() {
+  g.save(); g.globalAlpha = 0.72; g.font = `600 ${30 * S}px Kanit`; g.textAlign = 'right'; g.textBaseline = 'alphabetic';
+  g.shadowColor = 'rgba(0,0,0,0.85)'; g.shadowBlur = 8 * S; g.fillStyle = '#fff';
+  g.fillText(TL.watermark || 'samaichanvlogs', W - 64 * S, 237 * S); g.restore();
+}
+
 window.render = t => {
   TEXTS = [];
   g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#000'; g.fillRect(0, 0, W, H);
@@ -366,6 +373,7 @@ window.render = t => {
   if (s.map) drawMap(t, s); else { drawShot(t, s); vignette(); } box(t, s); stickers(t, s); ui(t, s); hook(t);
   if (!(s.endcard && t >= s.endcard.t)) captions(t);
   endcard(t, s);
+  watermark();
   if (s.future && t >= s.future.t && t < s.future.t + 0.4) glitch(1 - (t - s.future.t) / 0.4);
 };
 window.TEXTS = t => { window.render(t); return TEXTS; };
